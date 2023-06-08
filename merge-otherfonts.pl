@@ -35,11 +35,11 @@ sub fixf()
   return $_[0];
 }
 
-open(F,'unscii-16.hex');
+open(F,@ARGV[0]) || die "File not found ".@ARGV[0];
 $fglyph=<F>;
-open(G,'unifont.hex');
+open(G,@ARGV[1]) || die "File not found ".@ARGV[1];
 $gglyph=<G>;
-open(H,'fsex-adapted.hex');
+open(H,@ARGV[2]) || die "File not found ".@ARGV[2];
 $hglyph=<H>;
 $fglyph=&fixf($fglyph);
 $gglyph=&fixf($gglyph);

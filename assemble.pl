@@ -1,6 +1,7 @@
 #!/usr/bin/env perl
 
 use Encode;
+use Getopt::Long;
 
 %bitmaps8x8={};
 %bitmaps8x16={};
@@ -18,9 +19,7 @@ $lowestchar=$highestchar=32;
 
 sub dumpconvtab
 {
-  open(CT,">uns2uni.tr");
-  print CT "$unsconvchars\n$uniconvchars";
-  close(CT);
+  print STDOUT "$unsconvchars\n$uniconvchars";
 }
 
 sub encutf8
@@ -36,20 +35,11 @@ sub encutf8
 
 sub dumpfont
 {
-  $do8x8=0;
-  $do8x16=0;
-  foreach(split(',',$settings{'fontsizes'}))
-  {
-    $do8x8=1 if($_ eq '8x8') ;
-    $do8x16=1 if($_ eq '8x16');
-  }
-  $p='';
-  if($patch) { $p='-'.$patch; }
-  open(F8,">unscii-8$p.hex") if($do8x8);
-  open(F16,">unscii-16$p.hex") if($do8x16);
+  my ($do8x8)=@_;
+  my $do8x16 = not $do8x8;
 
-  print F8 "00000:00000000000000000000000000000000\n" if($do8x8);
-  print F16 "00000:00000000000000000000000000000000\n" if($do8x16);
+  print STDOUT "00000:0000000000000000\n" if($do8x8);
+  print STDOUT "00000:00000000000000000000000000000000\n" if($do8x16);
 
   %keycoll={};
   foreach(keys %bitmaps8x8)
@@ -94,7 +84,7 @@ sub dumpfont
 #          chr($last+1));
       }
       $hex=sprintf('%04X',$_);
-      #print "U+$hex lgt=".length($bitmaps8x16{$hex})."\n";
+      #print STDERR "U+$hex lgt=".length($bitmaps8x16{$hex})."\n";
       $hex8='';
       $hex16='';
       $hex1616='';
@@ -112,22 +102,20 @@ sub dumpfont
       }
       if($hex1616 ne '') { $hex16=$hex1616; }
       $hex=sprintf('%05X',$_);
-      print F8 "$hex:$hex8\n" if($do8x8 && $hex8);
-      print F16 "$hex:$hex16\n" if($do8x16 && $hex16);
+      print STDOUT "$hex:$hex8\n" if($do8x8 && $hex8);
+      print STDOUT "$hex:$hex16\n" if($do8x16 && $hex16);
 
 #      foreach(split('',$bitmaps8x16{$hex}))
 #      {
 #        #$_=unpack('B8',$_);
 #        #tr/01/\.\#/;
-#        #print "$_ ";
+#        #print STDERR "$_ ";
 #      }
-#      #print "\n";
+#      #print STDERR "\n";
     
       $last=$_;
     }
   }
-  close(F8);
-  close(F16);
 }
 
 sub doublebytes
@@ -173,18 +161,16 @@ sub equateforconv
 
 sub readin
 {
-  my $filename = ($_[0] eq 'PATCH')?"font-$patch.txt":$_[0];
-  return if($filename eq 'font-.txt');
+  my $filename = $_[0];
 
-  $filename="src/$filename";
   open(my $F,$filename) || die "File not found: $filename";
-  print "Assembling ".$_[0]." ...\n";
+  print STDERR "Assembling ".$_[0]." ...\n";
   my $linenum=0;
   while(<$F>)
   {
     $linenum++;
     @p=split('\s',$_);
-#    print "$p[0]...\n";
+#    print STDERR "$p[0]...\n";
     if($p[0] eq 'INCLUDE')
     {
       &readin($p[1]);
@@ -201,26 +187,26 @@ sub readin
         $charname=sprintf('%04X',$xtndpointer);
         $xtndpointer++;
         $title=substr($_,7);
-        #print "U+$charname : $title";
+        #print STDERR "U+$charname : $title";
       }
       if($charname eq 'XTND2')
       {
         $charname=sprintf('%04X',$xtnd2pointer);
         $xtnd2pointer++;
         $title=substr($_,7);
-        #print "U+$charname : $title";
+        #print STDERR "U+$charname : $title";
       }
       if($charname eq 'XTND3')
       {
         $charname=sprintf('%04X',$xtnd3pointer);
         $xtnd3pointer++;
         $title=substr($_,7);
-        #print "U+$charname : $title";
+        #print STDERR "U+$charname : $title";
       }
-#      print "Char $charname begins ...\n";
+#      print STDERR "Char $charname begins ...\n";
       if($bitline>=1 && $bitline!=$height)
       {
-        print "Bitmap not $height pixels high! <$linenum \@ $filename\n";
+        print STDERR "Bitmap not $height pixels high! <$linenum \@ $filename\n";
         exit(1);
       }
       $bitline=0;
@@ -246,7 +232,7 @@ sub readin
           }
           if($bitmaps8x8{$_} eq '')
           {
-            print "Glyph for $_ not defined! $linenum \@ $filename\n";
+            print STDERR "Glyph for $_ not defined! $linenum \@ $filename\n";
             exit(1);
           }
           $b8=&orbits($b8,$bitmaps8x8{$_});
@@ -320,7 +306,7 @@ sub readin
     {
       if($bitline>=1 && $bitline!=$height)
       {
-        print "Bitmap not $height pixels high! <$linenum \@ $filename\n";
+        print STDERR "Bitmap not $height pixels high! <$linenum \@ $filename\n";
         exit(1);
       }
       $mode=$p[0];
@@ -334,7 +320,7 @@ sub readin
       {
         if(length($p[0])!=$width)
         {
-          print "Bitmap not $width pixels wide! $linenum \@ $filename\n";
+          print STDERR "Bitmap not $width pixels wide! $linenum \@ $filename\n";
           exit(1);
         }
         tr/\.\#/01/;
@@ -373,7 +359,7 @@ sub readin
         }
         } else
         {
-          printf "Exceeding given bitmap height $linenum \@ $filename\n";
+          print STDERR "Exceeding given bitmap height $linenum \@ $filename\n";
           exit(1);
         }
       }
@@ -382,9 +368,16 @@ sub readin
   close(F);
 }
 
-$patch=$ARGV[0] if($#ARGV>=0);
-&readin('unscii.txt');
-&dumpfont();
-&dumpconvtab();
+$do8x8 = 0;
+$translate = 0;
 
-print "XTND $xtndpointer XTND2 $xtnd2pointer XTND3 $xtnd3pointer\n";
+GetOptions (
+     "short|8"      => \$do8x8,
+     "translate|t"      => \$translate,
+) || die "Syntax error";
+
+&readin($_) foreach (@ARGV);
+&dumpfont($do8x8) if not $translate;
+&dumpconvtab() if $translate;
+
+#print "XTND $xtndpointer XTND2 $xtnd2pointer XTND3 $xtnd3pointer\n";

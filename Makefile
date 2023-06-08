@@ -1,139 +1,137 @@
-SRC=src/unscii.txt src/punctuation.txt src/numbers.txt src/math.txt \
-src/textsymbols.txt src/latin.txt src/greek.txt src/cyrillic.txt \
-src/hebrew.txt src/arabic.txt src/katakana.txt src/runes.txt \
-src/diacritics.txt src/symbols.txt src/arrows.txt src/shapes.txt \
-src/lines.txt src/patterns.txt src/divisions.txt src/grids.txt \
-src/pictures.txt src/ctrl.txt
+SRC=src/punctuation.txt src/numbers.txt src/math.txt src/textsymbols.txt src/latin.txt src/greek.txt src/cyrillic.txt src/hebrew.txt src/arabic.txt src/katakana.txt src/runes.txt src/wideascii.txt src/diacritics.txt src/diacrcomb.txt src/symbols.txt src/arrows.txt src/divisions.txt src/lines.txt src/shapes.txt src/grids.txt src/patterns.txt src/pictures.txt src/ctrl.txt
+HEX=fontfiles/unscii-16.hex fontfiles/unscii-8.hex fontfiles/unscii-16-full.hex fontfiles/unscii-8-tall.hex fontfiles/unscii-8-thin.hex fontfiles/unscii-8-alt.hex fontfiles/unscii-8-fantasy.hex fontfiles/unscii-8-mcr.hex fontfiles/unscii-16-pc16.hex fontfiles/unscii-8-pc8.hex \
+    fontfiles/unscii-8-alt-only.hex fontfiles/unscii-8-arcade-only.hex fontfiles/unscii-8-atari8-only.hex fontfiles/unscii-8-bbcg-only.hex fontfiles/unscii-8-c64-only.hex fontfiles/unscii-8-cpc-only.hex fontfiles/unscii-8-fantasy-only.hex fontfiles/unscii-8-mcr-only.hex fontfiles/unscii-16-pc16-only.hex fontfiles/unscii-8-pc8-only.hex fontfiles/unscii-8-pet-only.hex fontfiles/unscii-8-spectrum-only.hex fontfiles/unscii-8-st-only.hex fontfiles/unscii-8-topaz-only.hex
 
 CC=gcc -Os
 
-all: unscii-16.pcf unscii-8.pcf unscii-16-full.pcf \
-     unscii-8-alt.pcf unscii-8-thin.pcf unscii-8-tall.pcf unscii-8-mcr.pcf unscii-8-fantasy.pcf \
-     unscii-16.ttf unscii-8.ttf unscii-16-full.ttf \
-     unscii-8-alt.ttf unscii-8-thin.ttf unscii-8-tall.ttf unscii-8-mcr.ttf unscii-8-fantasy.ttf \
-     bm2uns
+.SUFFIXES: .hex .svg .fnt .bdf .pcf .ttf
+.PHONY: all fnt bdf pcf ttf bm2uns
 
-VERSION=2.1
+all: fnt bdf pcf ttf bm2uns
 
-HEX2BDF=./hex2bdf.pl --version=$(VERSION)
+hex: $(HEX)
+fnt: $(HEX:.hex=.fnt)
+bdf: $(HEX:.hex=.bdf)
+svg: $(HEX:.hex=.svg)
+pcf: $(HEX:.hex=.pcf)
+ttf: $(HEX:.hex=.ttf)
+
+VERSION=2.1.1f
+
+ASSEMBLE16=perl ./assemble.pl
+ASSEMBLE8=perl ./assemble.pl -8
+HEX2BDF=perl ./hex2bdf.pl --version=$(VERSION)
 
 ### HEX ###
 
-unscii-16.hex: $(SRC)
-	./assemble.pl
+fontfiles/unscii-16.hex: $(SRC)
+	$(ASSEMBLE16) $> > $@
 
-unscii-8.hex: $(SRC)
-	./assemble.pl
+fontfiles/unscii-8.hex: $(SRC)
+	$(ASSEMBLE8) $> > $@
 
-unscii-8-alt.hex: $(SRC) src/font-alt.txt
-	./assemble.pl alt
+fontfiles/unscii-8-tall.hex: fontfiles/unscii-8.hex
+	perl ./doubleheight.pl < $> > $@
 
-unscii-8-thin.hex: $(SRC) src/font-thin.txt
-	./assemble.pl thin
+fontfiles/unscii-16-full.hex: fontfiles/unscii-16.hex unifont.hex fsex-adapted.hex
+	perl ./merge-otherfonts.pl $> > $@
 
-unscii-8-mcr.hex: $(SRC) src/font-mcr.txt
-	./assemble.pl mcr
+fontfiles/unscii-8-thin.hex: $(SRC) src/font-thin.txt
+	$(ASSEMBLE8) $> > $@
 
-unscii-8-fantasy.hex: $(SRC) src/font-fantasy.txt
-	./assemble.pl fantasy
+fontfiles/unscii-8-alt.hex: $(SRC) src/font-alt.txt
+	$(ASSEMBLE8) $> > $@
 
-unscii-8-tall.hex: unscii-8.hex
-	./doubleheight.pl < unscii-8.hex > unscii-8-tall.hex
+fontfiles/unscii-8-fantasy.hex: $(SRC) src/font-fantasy.txt
+	$(ASSEMBLE8) $> > $@
 
-unscii-16-full.hex: unscii-16.hex unifont.hex fsex-adapted.hex
-	./merge-otherfonts.pl > unscii-16-full.hex
+fontfiles/unscii-8-mcr.hex: $(SRC) src/font-mcr.txt
+	$(ASSEMBLE8) $> > $@
+
+fontfiles/unscii-8-pc8.hex: $(SRC) src/font-pc8.txt
+	$(ASSEMBLE8) $> > $@
+
+fontfiles/unscii-16-pc16.hex: $(SRC) src/font-pc16.txt
+	$(ASSEMBLE16) $> > $@
+
+fontfiles/unscii-8-alt-only.hex: src/font-alt.txt
+	$(ASSEMBLE8) $> > $@
+
+fontfiles/unscii-8-arcade-only.hex: src/font-arcade.txt
+	$(ASSEMBLE8) $> > $@
+
+fontfiles/unscii-8-atari8-only.hex: src/font-atari8.txt
+	$(ASSEMBLE8) $> > $@
+
+fontfiles/unscii-8-bbcg-only.hex: src/font-bbcg.txt
+	$(ASSEMBLE8) $> > $@
+
+fontfiles/unscii-8-c64-only.hex: src/font-c64.txt
+	$(ASSEMBLE8) $> > $@
+
+fontfiles/unscii-8-cpc-only.hex: src/font-cpc.txt
+	$(ASSEMBLE8) $> > $@
+
+fontfiles/unscii-8-fantasy-only.hex: src/font-fantasy.txt
+	$(ASSEMBLE8) $> > $@
+
+fontfiles/unscii-8-mcr-only.hex: src/font-mcr.txt
+	$(ASSEMBLE8) $> > $@
+
+fontfiles/unscii-16-pc16-only.hex: src/font-pc16.txt
+	$(ASSEMBLE16) $> > $@
+
+fontfiles/unscii-8-pc8-only.hex: src/font-pc8.txt
+	$(ASSEMBLE8) $> > $@
+
+fontfiles/unscii-8-pet-only.hex: src/font-pet.txt
+	$(ASSEMBLE8) $> > $@
+
+fontfiles/unscii-8-spectrum-only.hex: src/font-spectrum.txt
+	$(ASSEMBLE8) $> > $@
+
+fontfiles/unscii-8-st-only.hex: src/font-st.txt
+	$(ASSEMBLE8) $> > $@
+
+fontfiles/unscii-8-topaz-only.hex: src/font-topaz.txt
+	$(ASSEMBLE8) $> > $@
+
+### FNT ###
+
+.hex.fnt:
+	vtfontcvt $< $@
 
 ### PCF ###
 
-unscii-16.pcf: unscii-16.hex
-	$(HEX2BDF) --variant='16' --rows=16 < unscii-16.hex | bdftopcf > unscii-16.pcf
+.hex.bdf:
+	$(HEX2BDF) --variant='16' --rows=16 < $< > $@
 
-unscii-8.pcf: unscii-8.hex
-	$(HEX2BDF) --variant='8' --rows=8 < unscii-8.hex | bdftopcf > unscii-8.pcf
-
-unscii-8-alt.pcf: unscii-8-alt.hex
-	$(HEX2BDF) --variant='alt' --rows=8 < unscii-8-alt.hex | bdftopcf > unscii-8-alt.pcf
-
-unscii-8-thin.pcf: unscii-8-thin.hex
-	$(HEX2BDF) --variant='thin' --rows=8 < unscii-8-thin.hex | bdftopcf > unscii-8-thin.pcf
-
-unscii-8-tall.pcf: unscii-8-tall.hex
-	$(HEX2BDF) --variant='tall' --rows=16 < unscii-8-tall.hex | bdftopcf > unscii-8-tall.pcf
-
-unscii-8-mcr.pcf: unscii-8-mcr.hex
-	$(HEX2BDF) --variant='mcr' --rows=8 < unscii-8-mcr.hex | bdftopcf > unscii-8-mcr.pcf
-
-unscii-8-fantasy.pcf: unscii-8-fantasy.hex
-	$(HEX2BDF) --variant='fantasy' --rows=8 < unscii-8-fantasy.hex | bdftopcf > unscii-8-fantasy.pcf
-
-unscii-16-full.pcf: unscii-16-full.hex
-	$(HEX2BDF) --variant='full' --rows=16 < unscii-16-full.hex | bdftopcf > unscii-16-full.pcf
+.bdf.pcf:
+	bdftopcf < $< > $@
 
 ### SVG ###
 
-unscii-16.svg: unscii-16.hex vectorize
-	./vectorize 16 16 < unscii-16.hex > unscii-16.svg
-
-unscii-8.svg: unscii-8.hex vectorize
-	./vectorize 8 8 < unscii-8.hex > unscii-8.svg
-
-unscii-8-alt.svg: unscii-8-alt.hex vectorize
-	./vectorize 8 alt alt < unscii-8-alt.hex > unscii-8-alt.svg
-
-unscii-8-thin.svg: unscii-8-thin.hex vectorize
-	./vectorize 8 thin < unscii-8-thin.hex > unscii-8-thin.svg
-
-unscii-8-tall.svg: unscii-8-tall.hex vectorize
-	./vectorize 8 tall < unscii-8-tall.hex > unscii-8-tall.svg
-
-unscii-8-mcr.svg: unscii-8-mcr.hex vectorize
-	./vectorize 8 mcr < unscii-8-mcr.hex > unscii-8-mcr.svg
-
-unscii-8-fantasy.svg: unscii-8-fantasy.hex vectorize
-	./vectorize 8 fantasy < unscii-8-fantasy.hex > unscii-8-fantasy.svg
-
-unscii-16-full.svg: unscii-16-full.hex vectorize
-	./vectorize 16 full < unscii-16-full.hex > unscii-16-full.svg
+.hex.svg: vectorize
+	./vectorize 16 16 < $< > $@
 
 ### TTF/OTF/WOFF ###
 
-unscii-16.ttf: unscii-16.svg
-	./makevecfonts.ff unscii-16
-
-unscii-8.ttf: unscii-8.svg
-	./makevecfonts.ff unscii-8
-
-unscii-8-alt.ttf: unscii-8-alt.svg
-	./makevecfonts.ff unscii-8-alt
-
-unscii-8-thin.ttf: unscii-8-thin.svg
-	./makevecfonts.ff unscii-8-thin
-
-unscii-8-tall.ttf: unscii-8-tall.svg
-	./makevecfonts.ff unscii-8-tall
-
-unscii-8-mcr.ttf: unscii-8-mcr.svg
-	./makevecfonts.ff unscii-8-mcr
-
-unscii-8-fantasy.ttf: unscii-8-fantasy.svg
-	./makevecfonts.ff unscii-8-fantasy
-
-unscii-16-full.ttf: unscii-16-full.svg
-	./makevecfonts.ff unscii-16-full
+.svg.ttf: makevecfonts.ff
+	./makevecfonts.ff $*
 
 ### tools ###
 
 uns2uni.tr: $(SRC)
-	./assemble.pl
+	$(ASSEMBLE8) -t $> > $@
 
 vectorize: vectorize.c
-	$(CC) vectorize.c -o vectorize
+	$(CC) vectorize.c -o $@
 
 bm2uns: bm2uns.c bm2uns.i
-	$(CC) -O3 bm2uns.c -o bm2uns `sdl-config --libs --cflags` -lSDL_image -lm
+	$(CC) -O3 bm2uns.c -o $@ `sdl-config --libs --cflags` -lSDL_image -lm
 
 bm2uns.i: unscii-8.hex bm2uns-prebuild.pl
-	./bm2uns-prebuild.pl | sort > bm2uns.i
+	./bm2uns-prebuild.pl | sort > $@
 
 uns2uni: uns2uni.tr makeconverters.pl
 	./makeconverters.pl
@@ -144,8 +142,8 @@ uni2uns: uns2uni.tr makeconverters.pl
 ### release ###
 
 clean:
-	rm -f *~ *.pcf *.svg unscii*.hex vectorize bm2uns bm2uns.i *.ttf *.otf *.woff \
-	uns2uni.tr uns2uni uni2uns DEADJOE
+	rm -f fontfiles/*.hex fontfiles/*.pcf fontfiles/*.ttf fontfiles/*.otf fontfiles/*.woff fontfiles/*.fnt
+	rm -f *~ vectorize bm2uns bm2uns.i *.o uns2uni.tr uns2uni uni2uns DEADJOE
 
 srcpackage: clean
 	cd .. && tar czf unscii-$(VERSION)-src.tar.gz unscii-$(VERSION)-src
