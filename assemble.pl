@@ -38,7 +38,9 @@ sub dumpfont
   my ($do8x8)=@_;
   my $do8x16 = not $do8x8;
 
+  print STDOUT "# Height: 8\n" if($do8x8);
   print STDOUT "00000:0000000000000000\n" if($do8x8);
+  print STDOUT "# Height: 16\n" if($do8x16);
   print STDOUT "00000:00000000000000000000000000000000\n" if($do8x16);
 
   %keycoll={};
