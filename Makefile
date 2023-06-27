@@ -10,7 +10,7 @@ CC=gcc -Os
 all: fnt bdf pcf ttf bm2uns
 
 hex: $(HEX)
-fnt: $(HEX:.hex=.fnt)
+fnt: $(HEX:.hex=.fnt) fontfiles/fsex-adapted.fnt
 bdf: $(HEX:.hex=.bdf)
 svg: $(HEX:.hex=.svg)
 pcf: $(HEX:.hex=.pcf)
@@ -100,6 +100,9 @@ fontfiles/unscii-8-topaz-only.hex: src/font-topaz.txt
 
 .hex.fnt:
 	vtfontcvt $< $@
+
+fontfiles/fsex-adapted.fnt: fsex-adapted.hex
+	vtfontcvt $> $@
 
 ### PCF ###
 
