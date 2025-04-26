@@ -35,13 +35,11 @@ sub encutf8
 
 sub dumpfont
 {
-  my ($do8x8)=@_;
-  my $do8x16 = not $do8x8;
+  my ($do8)=@_;
+  my $do16 = not $do8;
 
-  print STDOUT "# Height: 8\n" if($do8x8);
-  print STDOUT "00000:0000000000000000\n" if($do8x8);
-  print STDOUT "# Height: 16\n" if($do8x16);
-  print STDOUT "00000:00000000000000000000000000000000\n" if($do8x16);
+  print STDOUT "# Height: 8\n" if($do8);
+  print STDOUT "# Height: 16\n" if($do16);
 
   %keycoll={};
   foreach(keys %bitmaps8x8)
@@ -104,8 +102,8 @@ sub dumpfont
       }
       if($hex1616 ne '') { $hex16=$hex1616; }
       $hex=sprintf('%05X',$_);
-      print STDOUT "$hex:$hex8\n" if($do8x8 && $hex8);
-      print STDOUT "$hex:$hex16\n" if($do8x16 && $hex16);
+      print STDOUT "$hex:$hex8\n" if($do8 && $hex8);
+      print STDOUT "$hex:$hex16\n" if($do16 && $hex16);
 
 #      foreach(split('',$bitmaps8x16{$hex}))
 #      {
@@ -330,35 +328,35 @@ sub readin
         $bitline++;
         if($bitline<=$height)
         {
-        if($width==8)
-        {
-          $bitmap.=pack('B8',$_);
-        } else
-        {
-          $bitmap.=pack('B16',$_);
-        }
+          if($width==8)
+          {
+            $bitmap.=pack('B8',$_);
+          } else
+          {
+            $bitmap.=pack('B16',$_);
+          }
         
-        if($bitline==$height)
-        {
-          if($height==8)
+          if($bitline==$height)
           {
-            $bitmaps8x8{$charname} = $bitmap;
-            if($bitmaps8x16{$charname} eq '')
+            if($height==8)
             {
-              $bitmaps8x16{$charname} = &doublebytes($bitmap);
+              $bitmaps8x8{$charname} = $bitmap;
+              if($bitmaps8x16{$charname} eq '')
+              {
+                $bitmaps8x16{$charname} = &doublebytes($bitmap);
+              }
+            }
+            elsif($height==16)
+            {
+              if($width==8)
+              {
+                $bitmaps8x16{$charname} = $bitmap;
+              } else
+              {
+                $bitmaps16x16{$charname} = $bitmap;
+              }
             }
           }
-          elsif($height==16)
-          {
-            if($width==8)
-            {
-              $bitmaps8x16{$charname} = $bitmap;
-            } else
-            {
-              $bitmaps16x16{$charname} = $bitmap;
-            }
-          }
-        }
         } else
         {
           print STDERR "Exceeding given bitmap height $linenum \@ $filename\n";
@@ -370,16 +368,16 @@ sub readin
   close(F);
 }
 
-$do8x8 = 0;
+$do8 = 0;
 $translate = 0;
 
 GetOptions (
-     "short|8"      => \$do8x8,
+     "short|8"      => \$do8,
      "translate|t"      => \$translate,
 ) || die "Syntax error";
 
 &readin($_) foreach (@ARGV);
-&dumpfont($do8x8) if not $translate;
+&dumpfont($do8) if not $translate;
 &dumpconvtab() if $translate;
 
 #print "XTND $xtndpointer XTND2 $xtnd2pointer XTND3 $xtnd3pointer\n";
