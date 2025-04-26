@@ -1,6 +1,10 @@
 The "Atari-style" Commodore 8-bit ROM font
 used in C-64/128 and C-16/116/Plus-4.
 
+This was a largely 7x7 font, except for graphics.
+
+=> https://damieng.com/blog/2011/02/20/typography-in-8-bits-system-fonts/#commodore-64-1982
+
 U+0040	C64:00
 8x8
 ..####.. 0	asymmetry in inversion
@@ -9,17 +13,6 @@ U+0040	C64:00
 .##.###. 3
 .##..... 4
 .##..##. 5
-..####.. 6
-........ 7
-
-U+0040	C64:00
-8x8
-..####.. 0
-.##..##. 1
-.##.###. 2
-.##.###. 3
-.##..... 4
-.##...#. 5
 ..####.. 6
 ........ 7
 
