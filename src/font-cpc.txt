@@ -1,5 +1,7 @@
 Amstrad CPC. non-ascii still missing
 
+=> https://damieng.com/blog/2011/02/20/typography-in-8-bits-system-fonts/#amstrad-cpc-1984
+
 8x8
 U+0020
 ........ 14592

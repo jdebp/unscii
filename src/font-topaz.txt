@@ -1,4 +1,7 @@
 The Amiga Topaz-8 font.
+This is version 2.0, which is significantly different to version 1.0.
+
+=> https://damieng.com/blog/2011/03/27/typography-in-16-bits-system-fonts/#commodore-amiga-2x-1991
 
 8x8
 U+0020
@@ -57,7 +60,7 @@ U+0024
 
 U+0025
 
-........
+........	Unusual slanted circles
 .##..##.
 #.#.##..
 ##.##...
@@ -68,7 +71,7 @@ U+0025
 
 U+0026
 
-..###...
+..###...	Bottom wider than top.
 .##.##..
 .##.#...
 .###.##.
@@ -546,7 +549,7 @@ U+0051
 ##..##..
 ##..##..
 ##..##..
-##.###..
+##.###..	Yes, the tail was blurred.
 .######.
 ........
 
@@ -702,7 +705,7 @@ U+005F
 ........
 ........
 ........
-#######.
+#######.	Underscores have guttering.
 
 U+0060
 
@@ -917,7 +920,7 @@ U+0073
 
 ........
 ........
-..####..
+..####..	Top smaller than bottom
 .##.....
 ..####..
 .....##.
@@ -1352,7 +1355,7 @@ U+00BE
 ##.##..#
 ..##..##
 .##..###
-........
+........	No descender for 4
 
 U+00BF
 ...##...

@@ -1,5 +1,7 @@
 Atari ST system font. non-ascii still missing
 
+=> https://damieng.com/blog/2011/03/27/typography-in-16-bits-system-fonts/#atari-st-lowmedium-res-1985
+
 8x8
 U+0020
 ........

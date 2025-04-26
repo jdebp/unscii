@@ -1,5 +1,7 @@
 The IBM PC 8x8 font used in CGA and the 80x43/50 modes of EGA and VGA.
 
+=> https://damieng.com/blog/2011/03/27/typography-in-16-bits-system-fonts#ibm-cga-adapter-1981
+
 8x8
 
 U+263A	PC:01

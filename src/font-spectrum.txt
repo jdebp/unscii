@@ -1,5 +1,11 @@
 ZX Spectrum ROM font.
 
+This was a 6x6 font, where all but two glyphs were 6x5.
+This is missing the block graphics from 128 to 143.
+
+=> https://damieng.com/blog/2011/02/20/typography-in-8-bits-system-fonts/#sinclair-zx-spectrum-1982
+=> https://worldofspectrum.org/ZXBasicManual/zxmanchap14.html
+
 U+0020
 8x8
 ........ 
@@ -632,7 +638,7 @@ U+2191
 ........ 
 
 U+005F
-........ 
+........ 	One of only two 8x8 glyphs
 ........ 
 ........ 
 ........ 
@@ -952,7 +958,7 @@ U+007E
 ........ 
 
 U+00A9
-..####.. 
+..####.. 	One of only two 8x8 glyphs
 .#....#. 
 #..##..# 
 #.#....# 
