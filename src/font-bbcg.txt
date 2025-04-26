@@ -1,5 +1,7 @@
 BBC micro graphics mode font.
 
+=> https://damieng.com/blog/2011/02/20/typography-in-8-bits-system-fonts/#acorn-bbc-micro-1981
+
 8x8
 U+0021
 ...##...
@@ -686,7 +688,7 @@ U+005F
 ........
 ########
 
-U+0060
+U+00A3
 
 ...###..
 ..##.##.

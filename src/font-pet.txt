@@ -1,6 +1,10 @@
 Used by Commodore PET and VIC-20.
 The Sharp MZ font is nearly identical in the ASCII range.
 
+This was a 7x7 font.
+
+=> https://damieng.com/blog/2011/02/20/typography-in-8-bits-system-fonts/#commodore-pet-1977
+
 U+0040	PET:00
 8x8
 ...###.. 
@@ -302,7 +306,7 @@ U+005D	PET:1D
 ..####.. 
 ........ 
 
-U+005E	PET:1E
+U+2191	PET:1E
 ........ 
 ....#... 
 ...###.. 
@@ -312,7 +316,7 @@ U+005E	PET:1E
 ....#... 
 ....#... 
 
-U+005F	PET:1F
+U+2190	PET:1F
 ........ 
 ........ 
 ...#.... 
