@@ -84,7 +84,8 @@ sub dumpfont
 #          chr($last+1));
       }
       $hex=sprintf('%04X',$_);
-      #print STDERR "U+$hex lgt=".length($bitmaps8x16{$hex})."\n";
+      #print STDERR "U+$hex lgt=".length($bitmaps8x8{$hex})."\n" if ($do8);
+      #print STDERR "U+$hex lgt8=".length($bitmaps8x16{$hex})." lgt16=".length($bitmaps16x16{$hex})."\n" if ($do16);
       $hex8='';
       $hex16='';
       $hex1616='';
@@ -163,7 +164,7 @@ sub readin
 {
   my $filename = $_[0];
 
-  open(my $F,$filename) || die "File not found: $filename";
+  open(my $F,'<',$filename) || die "File not found: $filename";
   print STDERR "Assembling ".$_[0]." ...\n";
   my $linenum=0;
   while(<$F>)
