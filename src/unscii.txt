@@ -98,6 +98,11 @@ INCLUDE numbers.txt
 INCLUDE math.txt
 	+±÷ *×· /\⁄ ¬ <>≤≥=≠≡≈ √ ∟⌐¬ ƒ∂ ∞ ∩ ∫⌠⌡
 
+INCLUDE mathematicalalphabet.txt
+	ABCDEFGHIJKLMNOPQRSTUVWXYZ etc
+	abcdefghijklmnopqrstuvwxyz etc
+	- Latin-1 but not as you know it, Jim.
+
 INCLUDE textsymbols.txt
 	&@#§¶ $¢£¤¥€₧ |‖¦ ©®℗§™℠ †‡ ªº
 

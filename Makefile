@@ -1,6 +1,6 @@
-SRC=src/punctuation.txt src/numbers.txt src/math.txt src/textsymbols.txt src/latin.txt src/greek.txt src/cyrillic.txt src/hebrew.txt src/arabic.txt src/katakana.txt src/runes.txt src/wideascii.txt src/diacritics.txt src/diacrcomb.txt src/symbols.txt src/arrows.txt src/divisions.txt src/lines.txt src/shapes.txt src/grids.txt src/patterns.txt src/pictures.txt src/ctrl.txt
+SRC=src/punctuation.txt src/numbers.txt src/math.txt src/mathematicalalphabet.txt src/textsymbols.txt src/latin.txt src/greek.txt src/cyrillic.txt src/hebrew.txt src/arabic.txt src/katakana.txt src/runes.txt src/wideascii.txt src/diacritics.txt src/diacrcomb.txt src/symbols.txt src/arrows.txt src/divisions.txt src/lines.txt src/shapes.txt src/grids.txt src/patterns.txt src/pictures.txt src/ctrl.txt
 HEX=fontfiles/unscii-16.hex fontfiles/unscii-8.hex fontfiles/unscii-16-full.hex fontfiles/unscii-8-tall.hex fontfiles/unscii-8-thin.hex fontfiles/unscii-8-alt.hex fontfiles/unscii-8-fantasy.hex fontfiles/unscii-8-mcr.hex fontfiles/unscii-16-pc16.hex fontfiles/unscii-8-pc8.hex \
-    fontfiles/unscii-8-alt-only.hex fontfiles/unscii-8-arcade-only.hex fontfiles/unscii-8-atari8-only.hex fontfiles/unscii-8-bbcg-only.hex fontfiles/unscii-16-bbcg-only.hex fontfiles/unscii-8-c64-only.hex fontfiles/unscii-8-cpc-only.hex fontfiles/unscii-8-fantasy-only.hex fontfiles/unscii-8-mcr-only.hex fontfiles/unscii-16-pc16-only.hex fontfiles/unscii-8-pc8-only.hex fontfiles/unscii-8-pet-only.hex fontfiles/unscii-16-pet-only.hex fontfiles/unscii-8-spectrum-only.hex fontfiles/unscii-8-st-only.hex fontfiles/unscii-8-topaz-only.hex
+    fontfiles/unscii-8-alt-only.hex fontfiles/unscii-8-arcade-only.hex fontfiles/unscii-8-atari8-only.hex fontfiles/unscii-8-bbcg-only.hex fontfiles/unscii-16-bbcg-only.hex fontfiles/unscii-8-c64-only.hex fontfiles/unscii-8-cpc-only.hex fontfiles/unscii-8-dragon-only.hex fontfiles/unscii-8-fantasy-only.hex fontfiles/unscii-8-mcr-only.hex fontfiles/unscii-16-pc16-only.hex fontfiles/unscii-8-pc8-only.hex fontfiles/unscii-8-pet-only.hex fontfiles/unscii-16-pet-only.hex fontfiles/unscii-8-spectrum-only.hex fontfiles/unscii-8-st-only.hex fontfiles/unscii-8-topaz-only.hex fontfiles/unscii-8-trs80-only.hex
 
 CC=gcc -Os
 
@@ -75,6 +75,9 @@ fontfiles/unscii-8-c64-only.hex: src/font-c64.txt
 fontfiles/unscii-8-cpc-only.hex: src/font-cpc.txt
 	$(ASSEMBLE8) $> > $@
 
+fontfiles/unscii-8-dragon-only.hex: src/font-mc6847t1.txt
+	$(ASSEMBLE8) $> > $@
+
 fontfiles/unscii-8-fantasy-only.hex: src/font-fantasy.txt
 	$(ASSEMBLE8) $> > $@
 
@@ -100,6 +103,9 @@ fontfiles/unscii-8-st-only.hex: src/font-st.txt
 	$(ASSEMBLE8) $> > $@
 
 fontfiles/unscii-8-topaz-only.hex: src/font-topaz.txt
+	$(ASSEMBLE8) $> > $@
+
+fontfiles/unscii-8-trs80-only.hex: src/font-mc6670p.txt
 	$(ASSEMBLE8) $> > $@
 
 ### FNT ###
