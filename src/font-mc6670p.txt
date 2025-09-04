@@ -1200,9 +1200,9 @@ U+005a
 ........
 
 
-	[[] UP SINGLE ARROW
+	[↑] UP SINGLE ARROW
 IND: 0x5b
-U+005b
+U+2191
 ....#...
 ...###..
 ..#.#.#.
@@ -1213,9 +1213,9 @@ U+005b
 ........
 
 
-	[\] DOWN SINGLE ARROW
+	[↓] DOWN SINGLE ARROW
 IND: 0x5c
-U+005c
+U+2193
 ....#...
 ....#...
 ....#...
@@ -1226,9 +1226,9 @@ U+005c
 ........
 
 
-	[]] LEFT SINGLE ARROW
+	[←] LEFT SINGLE ARROW
 IND: 0x5d
-U+005d
+U+2190
 ........
 ....#...
 ...#....
@@ -1239,9 +1239,9 @@ U+005d
 ........
 
 
-	[^] RIGHT SINGLE ARROW
+	[→] RIGHT SINGLE ARROW
 IND: 0x5e
-U+005e
+U+2192
 ........
 ....#...
 .....#..
