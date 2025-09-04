@@ -260,47 +260,72 @@ sub readin
       }
       elsif($p[1] eq 'FLIPX')
       {
-        if(!$bitmaps8x8{$p[2]})
+        if(!$bitmaps8x8{$p[2]} && !$bitmaps8x16{$p[2]} && !$bitmaps16x16{$p[2]})
         {
           print STDERR "Can't find bitmap $p[2] for flipx source! $linenum \@ $filename\n";
           exit(1);
         }
-        $b8='';
-        $b8.=&reversebitorder($_) foreach(split('',$bitmaps8x8{$p[2]}));
-        $b16='';
-        $b16.=&reversebitorder($_) foreach(split('',$bitmaps8x16{$p[2]}));
-        # no 16x16 support here yet
-        $bitmaps8x8{$charname} = $b8;
-        $bitmaps8x16{$charname} = $b16;
+        if($bitmaps8x8{$p[2]}) {
+          $b8='';
+          $b8.=&reversebitorder($_) foreach(split('',$bitmaps8x8{$p[2]}));
+          $bitmaps8x8{$charname} = $b8;
+        }
+        if($bitmaps8x16{$p[2]}) {
+          $b16='';
+          $b16.=&reversebitorder($_) foreach(split('',$bitmaps8x16{$p[2]}));
+          $bitmaps8x16{$charname} = $b16;
+        }
+        if($bitmaps16x16{$p[2]}) {
+          $b16='';
+          $b16.=&reversebitorder($_) foreach(split('',$bitmaps16x16{$p[2]}));
+          $bitmaps16x16{$charname} = $b16;
+        }
       }
       elsif($p[1] eq 'FLIPY')
       {
-        if(!$bitmaps8x8{$p[2]})
+        if(!$bitmaps8x8{$p[2]} && !$bitmaps8x16{$p[2]} && !$bitmaps16x16{$p[2]})
         {
           print STDERR "Can't find bitmap $p[2] for flipy source! $linenum \@ $filename\n";
           exit(1);
         }
-        $b8='';
-        $b8=$_.$b8 foreach(split('',$bitmaps8x8{$p[2]}));
-        $b16='';
-        $b16=$_.$b16 foreach(split('',$bitmaps8x16{$p[2]}));
-        # no 16x16 support here yet
-        $bitmaps8x8{$charname} = $b8;
-        $bitmaps8x16{$charname} = $b16;
+        if($bitmaps8x8{$p[2]}) {
+          $b8='';
+          $b8=$_.$b8 foreach(split('',$bitmaps8x8{$p[2]}));
+          $bitmaps8x8{$charname} = $b8;
+        }
+        if($bitmaps8x16{$p[2]}) {
+          $b16='';
+          $b16=$_.$b16 foreach(split('',$bitmaps8x16{$p[2]}));
+          $bitmaps8x16{$charname} = $b16;
+        }
+        if($bitmaps8x16{$p[2]}) {
+          $b16='';
+          $b16=$_.$b16 foreach(split('',$bitmaps16x16{$p[2]}));
+          $bitmaps16x16{$charname} = $b16;
+        }
       }
       elsif($p[1] eq 'INV')
       {
-        if(!$bitmaps8x8{$p[2]})
+        if(!$bitmaps8x8{$p[2]} && !$bitmaps8x16{$p[2]} && !$bitmaps16x16{$p[2]})
         {
           print STDERR "Can't find bitmap $p[2] for inv source! $linenum \@ $filename\n";
           exit(1);
         }
-        $b8='';
-        $b8.=chr(255-ord($_)) foreach(split('',$bitmaps8x8{$p[2]}));
-        $b16='';
-        $b16.=chr(255-ord($_)) foreach(split('',$bitmaps8x16{$p[2]}));
-        $bitmaps8x8{$charname} = $b8;
-        $bitmaps8x16{$charname} = $b16;
+        if($bitmaps8x8{$p[2]}) {
+          $b8='';
+          $b8.=chr(255-ord($_)) foreach(split('',$bitmaps8x8{$p[2]}));
+          $bitmaps8x8{$charname} = $b8;
+        }
+        if($bitmaps8x16{$p[2]}) {
+          $b16='';
+          $b16.=chr(255-ord($_)) foreach(split('',$bitmaps8x16{$p[2]}));
+          $bitmaps8x16{$charname} = $b16;
+        }
+        if($bitmaps8x16{$p[2]}) {
+          $b16='';
+          $b16.=chr(65536-ord($_)) foreach(split('',$bitmaps16x16{$p[2]}));
+          $bitmaps16x16{$charname} = $b16;
+        }
       }
     }
     elsif($p[0] eq '8x8' || $p[0] eq '8x16' || $p[0] eq '16x16')
