@@ -187,10 +187,10 @@ uns2uni.tr: $(SRC)
 	mv $@.tmp $@
 
 vectorize: vectorize.c
-	$(CC) vectorize.c -o $@
+	$(CC) $(CCFLAGS) vectorize.c -o $@
 
 bm2uns: bm2uns.c bm2uns.i
-	$(CC) -O3 bm2uns.c -o $@ `sdl-config --libs --cflags` -lSDL_image -lm
+	$(CC) $(CCFLAGS) -O3 bm2uns.c -o $@ `sdl-config --libs --cflags` -lSDL_image -lm
 
 bm2uns.i: unscii-8.hex bm2uns-prebuild.pl
 	./bm2uns-prebuild.pl | sort > $@.tmp
