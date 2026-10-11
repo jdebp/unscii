@@ -38,7 +38,7 @@ void drawgrid()
   }
 }
 
-int unpackgrid(char*src)
+void unpackgrid(char*src)
 {
   int i,j;
   gw=(strlen(src)*4)/gh;
@@ -227,6 +227,7 @@ int main(int argc,char**argv)
   {
     if(feof(stdin)) break;
     fgets(buf,128,stdin);
+    if ('#'==buf[0]) continue;
     while(buf[i] && (buf[i]!=':')) i++;
     glyphidx=unhex(buf,i);
     if(glyphidx>=32)
