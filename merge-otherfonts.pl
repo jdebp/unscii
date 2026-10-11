@@ -31,7 +31,8 @@ sub detectmargins()
 
 sub fixf()
 {
-  return '0'.$_[0] if substr($_[0],4,1) eq ':';
+  return '00'.$_[0] if substr($_[0],4,1) eq ':';
+  return '0'.$_[0] if substr($_[0],5,1) eq ':';
   return $_[0];
 }
 
@@ -45,9 +46,9 @@ $fglyph=&fixf($fglyph);
 $gglyph=&fixf($gglyph);
 $hglyph=&fixf($hglyph);
 
-for($i=0;$i<0x20000;$i++)
+for($i=0;$i<0x110000;$i++)
 {
-  $hex=sprintf('%05X',$i);
+  $hex=sprintf('%06X',$i);
 
   if(substr($fglyph,0,length($hex)) eq $hex)
   {
@@ -90,14 +91,14 @@ for($i=0;$i<0x20000;$i++)
       $src = 'U';
     }
 
-    $bitmap = substr($g,6);
+    $bitmap = substr($g,7);
     chop $bitmap;
     $wdt=int(length($bitmap)/4);
     if($rightwdt<0) { $rightwdt=$wdt; }
     elsif($rightwdt==0) { $rightwdt=8; }
     if(($wdt!=$rightwdt) && ($src eq 'F'))
     {
-      $abitmap = substr($gg,6);
+      $abitmap = substr($gg,7);
       chop $abitmap;
       $awdt=int(length($abitmap)/4);
       if($awdt==$rightwdt)
