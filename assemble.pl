@@ -76,7 +76,7 @@ sub dumpfont
   $last=31;
   foreach(sort { $a - $b } @keys)
   {
-    if($_ < 0x20000)
+    if($_ < 0x110000)
     {
       if($_ != ($last+1))
       {
@@ -102,7 +102,7 @@ sub dumpfont
         $hex1616.=sprintf("%02X",ord($_));
       }
       if($hex1616 ne '') { $hex16=$hex1616; }
-      $hex=sprintf('%05X',$_);
+      $hex=sprintf('%06X',$_);
       print STDOUT "$hex:$hex8\n" if($do8 && $hex8);
       print STDOUT "$hex:$hex16\n" if($do16 && $hex16);
 
@@ -174,6 +174,7 @@ sub readin
   open(my $F,'<',$filename) || die "File not found: $filename";
   print STDERR "Assembling ".$_[0]." ...\n";
   my $linenum=0;
+  my $b8, $b16, $b1616;
   while(<$F>)
   {
     $linenum++;
@@ -328,7 +329,7 @@ sub readin
         }
         if($bitmaps8x16{$p[2]}) {
           $b16='';
-          $b16.=chr(65536-ord($_)) foreach($bitmaps16x16{$p[2]} =~ /..?/g);
+          $b16.=chr(255-ord($_)) foreach(split('',$bitmaps16x16{$p[2]}));
           $bitmaps16x16{$charname} = $b16;
         }
       }
