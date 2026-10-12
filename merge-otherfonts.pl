@@ -37,11 +37,11 @@ sub fixf()
 }
 
 open(F,@ARGV[0]) || die "File not found ".@ARGV[0];
-$fglyph=<F>;
+do { $fglyph=<F> } while substr($fglyph,0,1) eq '#';
 open(G,@ARGV[1]) || die "File not found ".@ARGV[1];
-$gglyph=<G>;
+do { $gglyph=<G> } while substr($gglyph,0,1) eq '#';
 open(H,@ARGV[2]) || die "File not found ".@ARGV[2];
-$hglyph=<H>;
+do { $hglyph=<H> } while substr($hglyph,0,1) eq '#';
 $fglyph=&fixf($fglyph);
 $gglyph=&fixf($gglyph);
 $hglyph=&fixf($hglyph);
@@ -53,21 +53,21 @@ for($i=0;$i<0x110000;$i++)
   if(substr($fglyph,0,length($hex)) eq $hex)
   {
     $fg=$fglyph;
-    $fglyph=<F>;
+    do { $fglyph=<F> } while substr($fglyph,0,1) eq '#';
     $fglyph=&fixf($fglyph);
   } else { $fg=''; }
 
   if(substr($gglyph,0,length($hex)) eq $hex)
   {
     $gg=$gglyph;
-    $gglyph=<G>;
+    do { $gglyph=<G> } while substr($gglyph,0,1) eq '#';
     $gglyph=&fixf($gglyph);
   } else { $gg=''; }
 
   if(substr($hglyph,0,length($hex)) eq $hex)
   {
     $hg=$hglyph;
-    $hglyph=<H>;
+    do { $hglyph=<H> } while substr($hglyph,0,1) eq '#';
     $hglyph=&fixf($hglyph);
   } else { $hg=''; }
   
