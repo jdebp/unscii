@@ -218,13 +218,13 @@ int main(int argc,char**argv)
 {
   char buf[128];
 //  char*buf="0040:00007CC6C6C6DEDEDEDCC0C07C000000";
-  int i=0;
-  int glyphidx;
   gh=(argc==1 || argv[1][0]=='8')?8:16;
   if(argc>=2 && !strcmp(argv[2],"tall")) gh=16;
   makeheader((gh==8)?1:0, argc>2?argv[2]:"");
   for(;;)
   {
+    int i=0;
+    int glyphidx;
     if(feof(stdin)) break;
     fgets(buf,128,stdin);
     if ('#'==buf[0]) continue;
