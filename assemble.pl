@@ -38,8 +38,11 @@ sub dumpfont
   my ($do8)=@_;
   my $do16 = not $do8;
 
+  # FreeBSD 10.1 vt(4) tooling introduced comments and these directives into .hex files in 2014.
   print STDOUT "# Height: 8\n" if($do8);
+  print STDOUT "# Width: 8\n" if($do8);
   print STDOUT "# Height: 16\n" if($do16);
+  print STDOUT "# This is a variable-width font.\n" if($do16);
 
   %keycoll={};
   foreach(keys %bitmaps8x8)
@@ -73,7 +76,7 @@ sub dumpfont
     push(@keys,$_) if(/^[0-9]+$/);
   }
 
-  $last=31;
+  $last=-1;
   foreach(sort { $a - $b } @keys)
   {
     if($_ < 0x110000)
