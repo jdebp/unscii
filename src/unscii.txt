@@ -206,7 +206,7 @@ hex2bdf.pl: Converts a .hex file into a bdf font (this is from Unifont).
 fsex-adapted.hex: Fixedsys Excelsior autoadapted to Unscii metrics.
   Adapter script not included.
 
-unifont.hex: GNU Unifont.
+unifont*.hex: GNU Unifont.
 
 vectorize.c: Converts a .hex file into a trivially vectorized svg font
 
