@@ -233,14 +233,14 @@ sub readin
           {
             $_=sprintf("%04X",ord(decode('UTF-8',substr($_,1))));
           }
-          if($bitmaps8x8{$_} eq '')
+          if(($bitmaps8x8{$_} eq '') && ($bitmaps8x16{$_} eq '') && ($bitmaps16x16{$_} eq ''))
           {
             print STDERR "Glyph for $_ not defined! $linenum \@ $filename\n";
             exit(1);
           }
-          $b8=&orbits($b8,$bitmaps8x8{$_});
-          $b16=&orbits($b16,$bitmaps8x16{$_});
-          $b1616=&orbits($b1616,$bitmaps16x16{$_});
+          $b8=&orbits($b8,$bitmaps8x8{$_}) if($bitmaps8x8{$_} ne '');
+          $b16=&orbits($b16,$bitmaps8x16{$_}) if($bitmaps8x16{$_} ne '');
+          $b1616=&orbits($b1616,$bitmaps16x16{$_}) if($bitmaps16x16{$_} ne '');
         }
         if($#parts==0) { &equateforconv($charname,$parts[0]);
                          &equateforconv($parts[0],$charname); }

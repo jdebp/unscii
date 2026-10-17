@@ -22,6 +22,10 @@ SRC=src/punctuation.txt \
     src/patterns.txt \
     src/pictures.txt \
     src/ctrl.txt
+FNT1=fontfiles/fsex-adapted.fnt \
+     fontfiles/unscii-16-16-pet-and-bbcg.fnt \
+     fontfiles/unscii-8-8-pet-and-bbcg.fnt \
+     fontfiles/unscii-8-8-dragon-and-atari.fnt
 HEX1=fontfiles/unscii-8-8.hex \
      fontfiles/unscii-8-16.hex \
      fontfiles/unscii-16-16.hex \
@@ -63,7 +67,7 @@ HEX2=fontfiles/unscii-8-16-full.hex \
 all: vtfontcvt fnt bdf pcf ttf bm2uns
 
 hex: $(HEX1) $(HEX2)
-fnt: vtfontcvt $(HEX1:.hex=.fnt) fontfiles/fsex-adapted.fnt fontfiles/unscii-16-16-pet-and-bbcg.fnt fontfiles/unscii-8-8-pet-and-bbcg.fnt
+fnt: vtfontcvt $(HEX1:.hex=.fnt) $(FNT1)
 bdf: $(HEX1:.hex=.bdf) $(HEX2:.hex=.bdf)
 pcf: $(HEX1:.hex=.pcf) $(HEX2:.hex=.pcf)
 svg: vectorize $(HEX1:.hex=.svg) $(HEX2:.hex=.svg)
@@ -233,6 +237,10 @@ fontfiles/unscii-8-8-pet-and-bbcg.fnt: fontfiles/unscii-8-8-pet-only.hex fontfil
 	mv $@.tmp $@
 
 fontfiles/unscii-16-16-pet-and-bbcg.fnt: fontfiles/unscii-16-16-pet-only.hex fontfiles/unscii-16-16-bbcg-only.hex
+	./vtfontcvt $> > $@.tmp
+	mv $@.tmp $@
+
+fontfiles/unscii-8-8-dragon-and-atari.fnt: fontfiles/unscii-8-8-dragon-only.hex fontfiles/unscii-8-8-atari-only.hex
 	./vtfontcvt $> > $@.tmp
 	mv $@.tmp $@
 

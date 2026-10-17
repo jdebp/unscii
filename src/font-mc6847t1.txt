@@ -142,7 +142,7 @@ U+0049
 
 	[J] LATIN CAPITAL LETTER J
 INDEX: 0x0a
-U+004a
+U+004A
 ......#.
 ......#.
 ......#.
@@ -155,7 +155,7 @@ U+004a
 
 	[K] LATIN CAPITAL LETTER K
 INDEX: 0x0b
-U+004b
+U+004B
 ..#...#.
 ..#..#..
 ..#.#...
@@ -168,7 +168,7 @@ U+004b
 
 	[L] LATIN CAPITAL LETTER L
 INDEX: 0x0c
-U+004c
+U+004C
 ..#.....
 ..#.....
 ..#.....
@@ -181,7 +181,7 @@ U+004c
 
 	[M] LATIN CAPITAL LETTER M
 INDEX: 0x0d
-U+004d
+U+004D
 ..#...#.
 ..##.##.
 ..#.#.#.
@@ -194,7 +194,7 @@ U+004d
 
 	[N] LATIN CAPITAL LETTER N
 INDEX: 0x0e
-U+004e
+U+004E
 ..#...#.
 ..#...#.
 ..##..#.
@@ -207,7 +207,7 @@ U+004e
 
 	[O] LATIN CAPITAL LETTER O
 INDEX: 0x0f
-U+004f
+U+004F
 ...###..	MC6847 had square corners on 'O'.
 ..#...#.
 ..#...#.
@@ -350,7 +350,7 @@ U+0059
 
 	[Z] LATIN CAPITAL LETTER Z
 INDEX: 0x1a
-U+005a
+U+005A
 ..#####.
 ......#.
 .....#..
@@ -363,7 +363,7 @@ U+005a
 
 	[[] LEFT SQUARE BRACKET
 INDEX: 0x1b
-U+005b
+U+005B
 ...###..
 ...#....
 ...#....
@@ -376,7 +376,7 @@ U+005b
 
 	[\] REVERSE SOLIDUS
 INDEX: 0x1c
-U+005c
+U+005C
 ........	MC6847 extended upwards here.
 ..#.....
 ...#....
@@ -389,7 +389,7 @@ U+005c
 
 	[]] RIGHT SQUARE BRACKET
 INDEX: 0x1d
-U+005d
+U+005D
 ...###..
 .....#..
 .....#..
@@ -558,7 +558,7 @@ U+0029
 
 	[*] ASTERISK
 INDEX: 0x2a
-U+002a
+U+002A
 ........
 ....#...	The MC6847's asterisk was a diamond!
 ..#.#.#.
@@ -571,7 +571,7 @@ U+002a
 
 	[+] PLUS SIGN
 INDEX: 0x2b
-U+002b
+U+002B
 ........
 ....#...
 ....#...
@@ -584,7 +584,7 @@ U+002b
 
 	[,] COMMA
 INDEX: 0x2c
-U+002c
+U+002C
 ........
 ........
 ........
@@ -597,7 +597,7 @@ U+002c
 
 	[-] HYPHEN-MINUS
 INDEX: 0x2d
-U+002d
+U+002D
 ........
 ........
 ........
@@ -610,7 +610,7 @@ U+002d
 
 	[.] FULL STOP
 INDEX: 0x2e
-U+002e
+U+002E
 ........
 ........
 ........
@@ -623,7 +623,7 @@ U+002e
 
 	[/] SOLIDUS
 INDEX: 0x2f
-U+002f
+U+002F
 ........	MC6847 extended upwards here.
 ......#.
 .....#..
@@ -766,7 +766,7 @@ U+0039
 
 	[:] COLON
 INDEX: 0x3a
-U+003a
+U+003A
 ........
 ........
 ...##...
@@ -779,7 +779,7 @@ U+003a
 
 	[;] SEMICOLON
 INDEX: 0x3b
-U+003b
+U+003B
 ........
 ...##...
 ...##...
@@ -792,7 +792,7 @@ U+003b
 
 	[<] LESS-THAN SIGN
 INDEX: 0x3c
-U+003c
+U+003C
 .....#..
 ....#...
 ...#....
@@ -805,7 +805,7 @@ U+003c
 
 	[=] EQUALS SIGN
 INDEX: 0x3d
-U+003d
+U+003D
 ........
 ........
 ..#####.
@@ -818,7 +818,7 @@ U+003d
 
 	[>] GREATER-THAN SIGN
 INDEX: 0x3e
-U+003e
+U+003E
 ...#....
 ....#...
 .....#..
@@ -831,7 +831,7 @@ U+003e
 
 	[?] QUESTION MARK
 INDEX: 0x3f
-U+003f
+U+003F
 ...###..
 ..#...#.
 ......#.
@@ -1192,7 +1192,7 @@ U+007C
 
 INDEX: 0x5d
 U+007D
-...#....
+...#....	Not a true FLIPX of 0x5b
 ....#...
 ....#...
 .....#..
