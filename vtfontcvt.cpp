@@ -22,7 +22,7 @@
 
 namespace {
 
-  const char version[] = "1.0";
+  const char version[] = "1.1";
 
 #if !defined(__GLIBC__)
   const char *
@@ -63,11 +63,11 @@ namespace {
     /// Assume that every short option has a long option, so do not bother parsing the short_options array.
     for (const struct option * o(long_options); o->name; ++o)
     {
-      out << " [--" << o->name;
+      out.put(' ').put('[').put('-').put('-') << o->name;
       if (o->has_arg) out << " arg";
       out.put(']');
     }
-    out << " hexfont-normal-file [hexfont-bold-file] vtfont-file";
+    out << " hexfont-normal-file [hexfont-bold-file]";
     out.put('\n');
   }
 
@@ -347,14 +347,12 @@ VTFont::GlyphVector::size_type
 VTFont::upsert_glyph(
   const Glyph & glyph
 ) {
-#if 0
   std::pair<GlyphHashIndex::const_iterator, GlyphHashIndex::const_iterator> range(hash_index.equal_range(glyph.hash));
   for (GlyphHashIndex::const_iterator p(range.first), e(range.second); e != p; ++p) {
     const GlyphVector::size_type index(p->second);
     if (matches(glyphs[index], glyph))
       return index;
   }
-#endif
   const GlyphVector::const_iterator i(glyphs.insert(glyphs.end(), glyph));
   const GlyphVector::size_type index(i - glyphs.begin());
   hash_index.insert(GlyphHashIndex::value_type(glyph.hash, index));
@@ -362,7 +360,7 @@ VTFont::upsert_glyph(
 }
 
 bool
-VTFont::make_map_entries (
+VTFont::make_map_entries(
   EntryVector & entries,
   const CharacterMap & map,
   const char * filename
@@ -403,13 +401,15 @@ VTFont::make_map_entries (
 }
 
 bool                                      /// \return false on a load error
-VTFont::load (
+VTFont::load(
   unsigned map,
   std::istream & in,                      ///< input stream, presumed already positioned at BOF
   const char * filename
 ) {
   std::string line;
   unsigned long n(0UL);
+  typedef std::map<uint_fast32_t, Glyph::Rows> HexData;
+  HexData hex_data;
   while (getline(in, line))
   {
     ++n;
@@ -430,31 +430,45 @@ VTFont::load (
     } else
       ++p;
     const std::string::const_iterator b(p);
-    Glyph::Rows rows;
+    Glyph::Rows & rows(hex_data[codepoint]);
     if (!get_data_eol(rows, p, e, filename, line, n))
       return false;
-    if (rows.size() == height) {
-      Glyph glyph;
-      for (Glyph::Rows::const_iterator p(rows.begin()), e(rows.end()); e != p; ++p)
-        glyph.add_row(*p, (width + 7U) / 8U);
-      maps[map][codepoint] = upsert_glyph(glyph);
-    } else
-    if (rows.size() == height * 2U) {
-      Glyph left, right;
-      bool which(false);
-      for (Glyph::Rows::const_iterator p(rows.begin()), e(rows.end()); e != p; ++p) {
-        if (which)
-          right.add_row(*p, (width + 7U) / 8U);
-        else
-          left.add_row(*p, (width + 7U) / 8U);
-        which = !which;
-      }
-      maps[map][codepoint] = upsert_glyph(left);
-      maps[map + 1U][codepoint] = upsert_glyph(right);
-    } else
-    {
+    if (rows.size() != height && rows.size() != height * 2U) {
       error(filename, n, line, b, p, "Does not work as either a L-only or a L-R font.");
       return false;
+    }
+  }
+  // Doing all of the L glyphs first makes for better map entries.
+  for (auto h : hex_data) {
+    const Glyph::Rows & rows(h.second);
+    if (rows.size() >= height) {
+      const uint_fast32_t & codepoint(h.first);
+      Glyph glyph;
+      for (Glyph::Rows::const_iterator b(rows.begin()), e(rows.end()), p(b); e != p; ++p) {
+        if (p - b < height)
+          glyph.add_row(*p, (width + 7U) / 8U);
+        else
+          break;
+      }
+      maps[map][codepoint] = upsert_glyph(glyph);
+    }
+  }
+  // The R glyphs are not interleaved in the glyphs table, so the map entries are not continually split.
+  for (auto h : hex_data) {
+    const Glyph::Rows & rows(h.second);
+    if (rows.size() >= height * 2U) {
+      const uint_fast32_t & codepoint(h.first);
+      Glyph glyph;
+      for (Glyph::Rows::const_iterator b(rows.begin()), e(rows.end()), p(b); e != p; ++p) {
+        if (p - b < height)
+          continue;
+        else
+        if (p - b < height * 2U)
+          glyph.add_row(*p, (width + 7U) / 8U);
+        else
+          break;
+      }
+      maps[map + 1U][codepoint] = upsert_glyph(glyph);
     }
   }
   return true;
@@ -489,9 +503,8 @@ VTFont::save(
     error(filename, std::strerror(errno));
     return false;
   }
-  for (GlyphVector::const_iterator p(glyphs.begin()), e(glyphs.end()); e != p; ++p)
+  for (auto glyph : glyphs)
   {
-    const Glyph & glyph(*p);
     for (unsigned h(0U) ; h < height; ++h)
     {
       if (width <= 8U)
@@ -596,7 +609,7 @@ main (
   const char * hexfilenames[VTFont::NUM_MAPS / 2] = {};
   for (unsigned i(0U); i < sizeof hexfilenames/sizeof *hexfilenames; ++i)
   {
-    if (optind + 1 >= argc)
+    if (optind >= argc)
     {
       // We must have at least 1 input file.
       if (0 == i)
@@ -608,13 +621,6 @@ main (
     }
     hexfilenames[i] = argv[optind++];
   }
-  // The final argument is the output filename.
-  if (optind >= argc)
-  {
-    usage(std::cerr, prog);
-    return EXIT_FAILURE;
-  }
-  const char * vtfilename(argv[optind++]);
   // Check for spurious trailing arguments.
   if (optind < argc)
   {
@@ -648,14 +654,7 @@ main (
         return EXIT_FAILURE;
     }
   }
-  std::ofstream out(vtfilename, std::ios::trunc);
-  if (!out)
-  {
-    const int error(errno);
-    std::cerr << prog << ": error: " << vtfilename << ": " << std::strerror(error) << '\n';
-    return EXIT_FAILURE;
-  }
-  if (!font.save(out, vtfilename))
+  if (!font.save(std::cout, "/dev/stdout"))
     return EXIT_FAILURE;
 
   return EXIT_SUCCESS;
