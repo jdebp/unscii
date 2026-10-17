@@ -35,14 +35,13 @@ sub encutf8
 
 sub dumpfont
 {
-  my ($do8)=@_;
-  my $do16 = not $do8;
+  my ($do8x8, $do8x16, $do16x16)=@_;
 
   # FreeBSD 10.1 vt(4) tooling introduced comments and these directives into .hex files in 2014.
-  print STDOUT "# Height: 8\n" if($do8);
-  print STDOUT "# Width: 8\n" if($do8);
-  print STDOUT "# Height: 16\n" if($do16);
-  print STDOUT "# This is a variable-width font.\n" if($do16);
+  print STDOUT "# Height: 8\n" if($do8x8);
+  print STDOUT "# Height: 16\n" if($do8x16 || $do16x16);
+  print STDOUT "# Width: 8\n" if($do8x8 || $do8x16);
+  print STDOUT "# Width: 16\n" if($do16x16);
 
   %keycoll={};
   foreach(keys %bitmaps8x8)
@@ -76,38 +75,30 @@ sub dumpfont
     push(@keys,$_) if(/^[0-9]+$/);
   }
 
-  $last=-1;
+#  $last=-1;
   foreach(sort { $a - $b } @keys)
   {
     if($_ < 0x110000)
     {
       if($_ != ($last+1))
       {
-#        printf("We have hole %04X .. %04X i.e. %s\n",$last+1,$_-1,
-#          chr($last+1));
+#        printf("We have hole %04X .. %04X i.e. %s\n",$last+1,$_-1, chr($last+1));
       }
       $hex=sprintf('%04X',$_);
-      #print STDERR "U+$hex lgt=".length($bitmaps8x8{$hex})."\n" if ($do8);
-      #print STDERR "U+$hex lgt8=".length($bitmaps8x16{$hex})." lgt16=".length($bitmaps16x16{$hex})."\n" if ($do16);
-      $hex8='';
-      $hex16='';
-      $hex1616='';
-      foreach(split('',$bitmaps8x8{$hex}))
-      {
-        $hex8.=sprintf("%02X",ord($_));
-      }
-      foreach(split('',$bitmaps8x16{$hex}))
-      {
-        $hex16.=sprintf("%02X",ord($_));
-      }
-      foreach(split('',$bitmaps16x16{$hex}))
-      {
-        $hex1616.=sprintf("%02X",ord($_));
-      }
-      if($hex1616 ne '') { $hex16=$hex1616; }
+      #print STDERR "U+$hex lgt8x8=".length($bitmaps8x8{$hex})."\n" if ($do8x8);
+      #print STDERR "U+$hex lgt8x16=".length($bitmaps8x16{$hex})."\n" if ($do8x16);
+      #print STDERR "U+$hex lgt16x16=".length($bitmaps16x16{$hex})."\n" if ($do16x16);
+      $hex8x8='';
+      $hex8x16='';
+      $hex16x16='';
+      $hex8x8.=sprintf("%02X",ord($_)) foreach(split('',$bitmaps8x8{$hex}));
+      $hex8x16.=sprintf("%02X",ord($_)) foreach(split('',$bitmaps8x16{$hex}));
+      $hex16x16.=sprintf("%02X",ord($_)) foreach(split('',$bitmaps16x16{$hex}));
       $hex=sprintf('%06X',$_);
-      print STDOUT "$hex:$hex8\n" if($do8 && $hex8);
-      print STDOUT "$hex:$hex16\n" if($do16 && $hex16);
+      print STDOUT "$hex:$hex8x8\n" if($do8x8 && $hex8x8 ne '');
+      print STDOUT "$hex:$hex8x16\n" if($do8x16 && $hex8x16 ne '');
+      print STDOUT "$hex:$hex16x16\n" if($do8x16 && $hex8x16 eq '' && $hex16x16 ne '');
+      print STDOUT "$hex:$hex16x16\n" if($do16x16 && $hex16x16 ne '');
 
 #      foreach(split('',$bitmaps8x16{$hex}))
 #      {
@@ -117,7 +108,7 @@ sub dumpfont
 #      }
 #      #print STDERR "\n";
     
-      $last=$_;
+#      $last=$_;
     }
   }
 }
@@ -201,14 +192,14 @@ sub readin
         $title=substr($_,7);
         #print STDERR "U+$charname : $title";
       }
-      if($charname eq 'XTND2')
+      elsif($charname eq 'XTND2')
       {
         $charname=sprintf('%04X',$xtnd2pointer);
         $xtnd2pointer++;
         $title=substr($_,7);
         #print STDERR "U+$charname : $title";
       }
-      if($charname eq 'XTND3')
+      elsif($charname eq 'XTND3')
       {
         $charname=sprintf('%04X',$xtnd3pointer);
         $xtnd3pointer++;
@@ -380,12 +371,20 @@ sub readin
               {
                 $bitmaps8x16{$charname} = &doublebytes($bitmap);
               }
+              if($bitmaps16x16{$charname} eq '')
+              {
+                $bitmaps16x16{$charname}.=&dblw($_) foreach(split('',$bitmaps8x16{$charname}));
+              }
             }
             elsif($height==16)
             {
               if($width==8)
               {
                 $bitmaps8x16{$charname} = $bitmap;
+                if($bitmaps16x16{$charname} eq '')
+                {
+                  $bitmaps16x16{$charname}.=&dblw($_) foreach(split('',$bitmap));
+                }
               } else
               {
                 $bitmaps16x16{$charname} = $bitmap;
@@ -403,16 +402,20 @@ sub readin
   close(F);
 }
 
-$do8 = 0;
+$do8x8 = 0;
+$do8x16 = 0;
+$do16x16 = 0;
 $translate = 0;
 
 GetOptions (
-     "short|8"      => \$do8,
+     "small|8x8"      => \$do8x8,
+     "tall|8x16"      => \$do8x16,
+     "big|16x16"      => \$do16x16,
      "translate|t"      => \$translate,
 ) || die "Syntax error";
 
 &readin($_) foreach (@ARGV);
-&dumpfont($do8) if not $translate;
+&dumpfont($do8x8, $do8x16, $do16x16) if not $translate;
 &dumpconvtab() if $translate;
 
 #print "XTND $xtndpointer XTND2 $xtnd2pointer XTND3 $xtnd3pointer\n";

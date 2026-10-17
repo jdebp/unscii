@@ -30,7 +30,7 @@ HEX1=fontfiles/unscii-8-8.hex \
      fontfiles/unscii-8-8-fantasy.hex \
      fontfiles/unscii-8-8-mcr.hex \
      fontfiles/unscii-8-8-pc.hex \
-     fontfiles/unscii-16-16-pc.hex \
+     fontfiles/unscii-8-16-pc.hex \
      fontfiles/unscii-8-8-alt-only.hex \
      fontfiles/unscii-8-8-arcade-only.hex \
      fontfiles/unscii-8-8-atari-only.hex \
@@ -42,7 +42,7 @@ HEX1=fontfiles/unscii-8-8.hex \
      fontfiles/unscii-8-8-fantasy-only.hex \
      fontfiles/unscii-8-8-mcr-only.hex \
      fontfiles/unscii-8-8-pc-only.hex \
-     fontfiles/unscii-16-16-pc-only.hex \
+     fontfiles/unscii-8-16-pc-only.hex \
      fontfiles/unscii-8-8-pet-only.hex \
      fontfiles/unscii-16-16-pet-only.hex \
      fontfiles/unscii-8-8-spectrum-only.hex \
@@ -71,8 +71,9 @@ ttf: vectorize $(HEX1:.hex=.ttf) $(HEX2:.hex=.ttf)
 
 VERSION=2.1.1f
 
-ASSEMBLE16=perl ./assemble.pl
-ASSEMBLE8=perl ./assemble.pl -8
+ASSEMBLE16BY16=perl ./assemble.pl -16x16
+ASSEMBLE8BY16=perl ./assemble.pl -8x16
+ASSEMBLE8BY8=perl ./assemble.pl -8x8
 HEX2BDF=perl ./hex2bdf.pl --version=$(VERSION)
 
 ### HEX ###
@@ -102,11 +103,11 @@ fontfiles/unifont-full.hex: unifont_fallback0.hex unifont_fallback1.hex unifont_
 	mv $@.tmp $@
 
 fontfiles/unscii-16-16.hex: $(SRC)
-	$(ASSEMBLE16) $> > $@.tmp
+	$(ASSEMBLE16BY16) $> > $@.tmp
 	mv $@.tmp $@
 
 fontfiles/unscii-8-8.hex: $(SRC)
-	$(ASSEMBLE8) $> > $@.tmp
+	$(ASSEMBLE8BY8) $> > $@.tmp
 	mv $@.tmp $@
 
 fontfiles/unscii-8-16.hex: fontfiles/unscii-8-8.hex
@@ -126,117 +127,117 @@ fontfiles/unscii-16-16-full.hex: fontfiles/unscii-16-16.hex fontfiles/unifont-fu
 	mv $@.tmp $@
 
 fontfiles/unscii-8-8-thin.hex: $(SRC) src/font-thin.txt
-	$(ASSEMBLE8) $> > $@.tmp
+	$(ASSEMBLE8BY8) $> > $@.tmp
 	mv $@.tmp $@
 
 fontfiles/unscii-8-8-alt.hex: $(SRC) src/font-alt.txt
-	$(ASSEMBLE8) $> > $@.tmp
+	$(ASSEMBLE8BY8) $> > $@.tmp
 	mv $@.tmp $@
 
 fontfiles/unscii-8-8-fantasy.hex: $(SRC) src/font-fantasy.txt
-	$(ASSEMBLE8) $> > $@.tmp
+	$(ASSEMBLE8BY8) $> > $@.tmp
 	mv $@.tmp $@
 
 fontfiles/unscii-8-8-mcr.hex: $(SRC) src/font-mcr.txt
-	$(ASSEMBLE8) $> > $@.tmp
+	$(ASSEMBLE8BY8) $> > $@.tmp
 	mv $@.tmp $@
 
 fontfiles/unscii-8-8-pc.hex: $(SRC) src/font-pc8.txt
-	$(ASSEMBLE8) $> > $@.tmp
+	$(ASSEMBLE8BY8) $> > $@.tmp
 	mv $@.tmp $@
 
-fontfiles/unscii-16-16-pc.hex: $(SRC) src/font-pc16.txt
-	$(ASSEMBLE16) $> > $@.tmp
+fontfiles/unscii-8-16-pc.hex: $(SRC) src/font-pc16.txt
+	$(ASSEMBLE8BY16) $> > $@.tmp
 	mv $@.tmp $@
 
 fontfiles/unscii-8-8-alt-only.hex: src/font-alt.txt
-	$(ASSEMBLE8) $> > $@.tmp
+	$(ASSEMBLE8BY8) $> > $@.tmp
 	mv $@.tmp $@
 
 fontfiles/unscii-8-8-arcade-only.hex: src/font-arcade.txt
-	$(ASSEMBLE8) $> > $@.tmp
+	$(ASSEMBLE8BY8) $> > $@.tmp
 	mv $@.tmp $@
 
 fontfiles/unscii-8-8-atari-only.hex: src/font-atari8.txt
-	$(ASSEMBLE8) $> > $@.tmp
+	$(ASSEMBLE8BY8) $> > $@.tmp
 	mv $@.tmp $@
 
 fontfiles/unscii-8-8-bbcg-only.hex: src/font-bbcg.txt
-	$(ASSEMBLE8) $> > $@.tmp
+	$(ASSEMBLE8BY8) $> > $@.tmp
 	mv $@.tmp $@
 
 fontfiles/unscii-16-16-bbcg-only.hex: src/font-bbcg16.txt
-	$(ASSEMBLE16) $> > $@.tmp
+	$(ASSEMBLE16BY16) $> >> $@.tmp
 	mv $@.tmp $@
 
 fontfiles/unscii-8-8-c64-only.hex: src/font-c64.txt
-	$(ASSEMBLE8) $> > $@.tmp
+	$(ASSEMBLE8BY8) $> > $@.tmp
 	mv $@.tmp $@
 
 fontfiles/unscii-8-8-cpc-only.hex: src/font-cpc.txt
-	$(ASSEMBLE8) $> > $@.tmp
+	$(ASSEMBLE8BY8) $> > $@.tmp
 	mv $@.tmp $@
 
 fontfiles/unscii-8-8-dragon-only.hex: src/font-mc6847t1.txt
-	$(ASSEMBLE8) $> > $@.tmp
+	$(ASSEMBLE8BY8) $> > $@.tmp
 	mv $@.tmp $@
 
 fontfiles/unscii-8-8-fantasy-only.hex: src/font-fantasy.txt
-	$(ASSEMBLE8) $> > $@.tmp
+	$(ASSEMBLE8BY8) $> > $@.tmp
 	mv $@.tmp $@
 
 fontfiles/unscii-8-8-mcr-only.hex: src/font-mcr.txt
-	$(ASSEMBLE8) $> > $@.tmp
+	$(ASSEMBLE8BY8) $> > $@.tmp
 	mv $@.tmp $@
 
-fontfiles/unscii-16-16-pc-only.hex: src/font-pc16.txt
-	$(ASSEMBLE16) $> > $@.tmp
+fontfiles/unscii-8-16-pc-only.hex: src/font-pc16.txt
+	$(ASSEMBLE8BY16) $> > $@.tmp
 	mv $@.tmp $@
 
 fontfiles/unscii-8-8-pc-only.hex: src/font-pc8.txt
-	$(ASSEMBLE8) $> > $@.tmp
+	$(ASSEMBLE8BY8) $> > $@.tmp
 	mv $@.tmp $@
 
 fontfiles/unscii-8-8-pet-only.hex: src/font-pet.txt
-	$(ASSEMBLE8) $> > $@.tmp
+	$(ASSEMBLE8BY8) $> > $@.tmp
 	mv $@.tmp $@
 
 fontfiles/unscii-16-16-pet-only.hex: src/font-pet16.txt
-	$(ASSEMBLE16) $> > $@.tmp
+	$(ASSEMBLE16BY16) $> >> $@.tmp
 	mv $@.tmp $@
 
 fontfiles/unscii-8-8-spectrum-only.hex: src/font-spectrum.txt
-	$(ASSEMBLE8) $> > $@.tmp
+	$(ASSEMBLE8BY8) $> > $@.tmp
 	mv $@.tmp $@
 
 fontfiles/unscii-8-8-st-only.hex: src/font-st.txt
-	$(ASSEMBLE8) $> > $@.tmp
+	$(ASSEMBLE8BY8) $> > $@.tmp
 	mv $@.tmp $@
 
 fontfiles/unscii-8-8-topaz-only.hex: src/font-topaz.txt
-	$(ASSEMBLE8) $> > $@.tmp
+	$(ASSEMBLE8BY8) $> > $@.tmp
 	mv $@.tmp $@
 
 fontfiles/unscii-8-8-trs80-only.hex: src/font-mc6670p.txt
-	$(ASSEMBLE8) $> > $@.tmp
+	$(ASSEMBLE8BY8) $> > $@.tmp
 	mv $@.tmp $@
 
 ### FNT ###
 
 .hex.fnt:
-	./vtfontcvt $< $@.tmp
+	./vtfontcvt $< > $@.tmp
 	mv $@.tmp $@
 
 fontfiles/unscii-8-8-pet-and-bbcg.fnt: fontfiles/unscii-8-8-pet-only.hex fontfiles/unscii-8-8-bbcg-only.hex
-	./vtfontcvt $> $@.tmp
+	./vtfontcvt $> > $@.tmp
 	mv $@.tmp $@
 
 fontfiles/unscii-16-16-pet-and-bbcg.fnt: fontfiles/unscii-16-16-pet-only.hex fontfiles/unscii-16-16-bbcg-only.hex
-	./vtfontcvt $> $@.tmp
+	./vtfontcvt $> > $@.tmp
 	mv $@.tmp $@
 
 fontfiles/fsex-adapted.fnt: fsex-adapted.hex
-	./vtfontcvt $> $@.tmp
+	./vtfontcvt $> > $@.tmp
 	mv $@.tmp $@
 
 ### PCF ###
@@ -292,7 +293,7 @@ fontfiles/unscii-16-pet-only.bdf: fontfiles/unscii-16-pet-only.hex
 ### tools ###
 
 uns2uni.tr: $(SRC)
-	$(ASSEMBLE8) -t $> > $@.tmp
+	$(ASSEMBLE8BY8) -t $> > $@.tmp
 	mv $@.tmp $@
 
 vtfontcvt: vtfontcvt.cpp
