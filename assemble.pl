@@ -233,7 +233,7 @@ sub readin
         @parts=split('\+',$comb);
         $b8="\0\0\0\0\0\0\0\0";
         $b16=$b8.$b8;
-        $b1616=$nulls=$b16.$b16;
+        $b1616=$b16.$b16;
         foreach(@parts)
         {
           if(substr($_,0,1) eq "'")
@@ -253,7 +253,7 @@ sub readin
                          &equateforconv($parts[0],$charname); }
         $bitmaps8x8{$charname} = $b8;
         $bitmaps8x16{$charname} = $b16;
-        $bitmaps16x16{$charname} = $b1616 if($b1616 ne $nulls);
+        $bitmaps16x16{$charname} = $b1616;
       }
       elsif($p[1] eq 'DBLW')
       {
