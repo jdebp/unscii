@@ -142,6 +142,13 @@ sub reversebitorder
   return pack('B8',unpack('b8',$_[0]));
 }
 
+sub swapbytepairs
+{
+  $_ = $_[0];
+  s/(.)(.)/\2\1/g;
+  return $_;
+}
+
 sub dblw
 {
   $_=unpack('B8',$_[0]);
@@ -279,7 +286,7 @@ sub readin
         }
         if($bitmaps16x16{$p[2]}) {
           $b16='';
-          $b16.=&reversebitorder($_) foreach(split('',&reversebyteorder($bitmaps16x16{$p[2]})));
+          $b16.=&reversebitorder($_) foreach(split('',&swapbytepairs($bitmaps16x16{$p[2]})));
           $bitmaps16x16{$charname} = $b16;
         }
       }
