@@ -62,8 +62,9 @@ The unadorned `-16-16`, `-8-16`, and `-8-8` Unscii fonts are the vanilla Unscii 
 The non-`-only` versions with extra suffixes such as `-pc` patch in the named systems
 Not all of the systems are patched in.
 
-The `-pet-and-bbcg` variants are special to FreeBSD's vt(4) font file format, which can hold two fonts in a single file, for two different weights.
-These fonts use PETSCII for normal weight, and BBC Micro for bold weight.
+The `-*-and-*` variants are special to FreeBSD's vt(4) font file format, which can hold two fonts in a single file, for two different weights.
+The `-pet-and-bbcg` fonts use PETSCII for normal weight, and BBC Micro Graphics for bold weight.
+The `-dragon-and-atari` fonts use Motorola MC 6847T1 for normal weight, and ATSCII for bold weight.
 
 ## Tool and font format limitations
 

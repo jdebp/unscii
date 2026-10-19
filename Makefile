@@ -51,6 +51,7 @@ HEX1=fontfiles/unscii-8-8.hex \
      fontfiles/unscii-16-16-pet-only.hex \
      fontfiles/unscii-8-8-spectrum-only.hex \
      fontfiles/unscii-8-8-st-only.hex \
+     fontfiles/unscii-8-16-tall.hex \
      fontfiles/unscii-8-8-topaz-only.hex \
      fontfiles/unscii-8-8-trs80-only.hex \
      fontfiles/unifont-fallback.hex \
@@ -110,11 +111,15 @@ fontfiles/unscii-16-16.hex: $(SRC)
 	$(ASSEMBLE16BY16) $> > $@.tmp
 	mv $@.tmp $@
 
+fontfiles/unscii-8-16.hex: $(SRC)
+	$(ASSEMBLE8BY16) $> > $@.tmp
+	mv $@.tmp $@
+
 fontfiles/unscii-8-8.hex: $(SRC)
 	$(ASSEMBLE8BY8) $> > $@.tmp
 	mv $@.tmp $@
 
-fontfiles/unscii-8-16.hex: fontfiles/unscii-8-8.hex
+fontfiles/unscii-8-16-tall.hex: fontfiles/unscii-8-8.hex
 	perl ./doubleheight.pl < $> > $@.tmp
 	mv $@.tmp $@
 
