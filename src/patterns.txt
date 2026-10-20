@@ -1037,8 +1037,8 @@ U+E844	SPARSE ORTHOGONAL CROSSHATCH FILL
 8x8
 .....#..	Sharp MZ. Chosen because MZ also has connecting line pieces.
 .....#..	Sabine shape has a different horizontal position (by 1 pixel).
+.....#..	So do other sources of Sharp MZ ruler glyphs.
 .....#..	Fill pattern in Mac/GeoPaint.
-.....#..
 .....#..
 .....#..
 ########
