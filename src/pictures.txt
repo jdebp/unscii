@@ -1182,7 +1182,7 @@ U+EC23 = 1FBC5
 Sharp MZ has rotated variants of the human being.
 We rotated the chosen CPC shape instead.
 
-U+EC24	STICK FIGURE HEADING DOWN
+U+1CC04	STICK FIGURE HEADING DOWN
 #.....#.
 .#...#..
 ..#.#...
@@ -1191,8 +1191,9 @@ U+EC24	STICK FIGURE HEADING DOWN
 ...#....
 ..###...
 ..###...
+U+EC24 = 1CC04
 
-U+EC25	STICK FIGURE HEADING LEFT
+U+1CC03	STICK FIGURE HEADING LEFT
 ...#...#
 ...#..#.
 ##.#.#..
@@ -1201,8 +1202,9 @@ U+EC25	STICK FIGURE HEADING LEFT
 ...#..#.
 ...#...#
 ........
+U+EC25 = 1CC03
 
-U+EC26	STICK FIGURE HEADING RIGHT
+U+1CC02	STICK FIGURE HEADING RIGHT
 #...#...
 .#..#...
 ..#.#.##
@@ -1211,6 +1213,7 @@ U+EC26	STICK FIGURE HEADING RIGHT
 .#..#...
 #...#...
 ........
+U+EC26 = 1CC02
 
 U+1FBC7	STICK FIGURE LEANING LEFT
 ; cpc
