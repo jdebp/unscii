@@ -743,7 +743,7 @@ U+2318	LOOPED SQUARE
 
 These come from the Sharp MZ.
 
-U+2301	ELECTRIC ARROW
+U+2301	ELECTRIC ARROW/HORIZONTAL RESISTOR SEGMENT
 8x8
 ........ 
 ........ 
@@ -753,8 +753,9 @@ U+2301	ELECTRIC ARROW
 .....#.# 
 ......#. 
 ........ 
+U+1CC09 = 2301
 
-U+XTND2
+U+1CC0A VERTICAL RESISTOR SEGMENT
 8x8
 ....#... 
 ...#.... 
@@ -764,6 +765,7 @@ U+XTND2
 .....#.. 
 ......#. 
 .....#.. 
+U+XTND2 = 1CC0A
 
 The high voltage sign 26A1 is double-width so we won't add it there
 
@@ -804,9 +806,9 @@ U+XTND3
 .....#.#
 .......#
 
-U+XTND3
+U+1CC08	ANTENNA
 8x8
-#..#..#. 3496 	antenna, sharp mz
+#..#..#. 3496 	antenna, Sharp mz
 .#.#.#.. 3497 
 ..###... 3498 
 ...#.... 3499 
@@ -814,9 +816,10 @@ U+XTND3
 ...#.... 3501 
 ...#.... 3502 
 ...#.... 3503 
+U+XTND3 = 1CC08
 
-U+XTND3
-#...#... 1864	npn transistor, sharp mz
+U+1CC10 NPN TRANSISTOR
+#...#... 1864	Sharp mz
 #..#.... 1865 
 #.#..... 1866 
 ##...... 1867 
@@ -824,9 +827,10 @@ U+XTND3
 #.#.#... 1869 
 #..##... 1870 
 #.###... 1871 
+U+XTND3 = 1CC10
 
-U+XTND3
-#.#.#... 1872 	pnp transistor, sharp mz
+U+1CC11 PNP TRANSISTOR
+#.#.#... 1872 	pnp transistor, Sharp mz
 #.##.... 1873 
 #.###... 1874 
 ##...... 1875 
@@ -834,9 +838,10 @@ U+XTND3
 #.#..... 1877 
 #..#.... 1878 
 #...#... 1879 
+U+XTND3 = 1CC11
 
-U+XTND3
-........ 1888 	mz: capacitor
+U+1CC13	HORIZONTAL CAPACITOR
+........ 1888 	Sharp mz
 ........ 1889 
 ..#..#.. 1890 
 ..#..#.. 1891 
@@ -844,9 +849,10 @@ U+XTND3
 ..#..#.. 1893 
 ..#..#.. 1894 
 ........ 1895 
+U+XTND3 = 1CC13
 
-U+XTND3
-...#.... 1896 	mz: capacitor, realigned
+U+1CC14	VERTICAL CAPACITOR
+...#.... 1896 	Sharp mz: realigned
 ...#.... 1897 
 .#####.. 1898 
 ........ 1899 
@@ -854,9 +860,10 @@ U+XTND3
 .#####.. 1901 
 ...#.... 1902 
 ...#.... 1903
+U+XTND3 = 1CC14
 
-U+EC73
-#####... 	mz: OR gate
+U+1CC15	LOGIC GATE OR
+#####... 	Sharp MZ
 .#...#.. 
 .#....#. 
 ..#....# 
@@ -864,9 +871,10 @@ U+EC73
 .#....#. 
 .#...#.. 
 #####... 
+U+EC73 = 1CC15
 
-U+EC75
-######.. 	mz: AND gate
+U+1CC16	LOGIC GATE AND
+######.. 	Sharp MZ
 #....##. 
 #.....#. 
 #......# 
@@ -874,9 +882,10 @@ U+EC75
 #.....#. 
 #....##. 
 ######.. 
+U+EC75 = 1CC16
 
-U+XTND3
-........ 1848 	mz: diode
+U+1CC0F	RIGHT-POINTING DIODE
+........ 1848 	Sharp MZ
 ##...#.. 1849 
 #.#..#.. 1850 
 #..#.#.. 1851 
@@ -884,9 +893,10 @@ U+XTND3
 #..#.#.. 1853 
 #.#..#.. 1854 
 ##...#.. 1855 
+U+XTND3 = 1CC0F
 
-U+XTND3
-........ 1856 
+U+1CC0E	LEFT-POINTING DIODE
+........ 1856 Sharp MZ
 ..#...## 1857 
 ..#..#.# 1858 
 ..#.#..# 1859 
@@ -894,6 +904,7 @@ U+XTND3
 ..#.#..# 1861 
 ..#..#.# 1862 
 ..#...## 1863 
+U+XTND3 = 1CC0E
 
 U+XTND3
 .####### 2976 	is this also supposed to be a diode?
@@ -905,8 +916,8 @@ U+XTND3
 ....#... 2982 
 .####### 2983 
 
-U+XTND3
-........ 3848 	mz: gnd?
+U+1CC19 LOGIC GATE BUFFER
+........ 3848 	Sharp MZ
 ....#... 3849 
 ....##.. 3850 
 ....#.#. 3851 
@@ -914,9 +925,10 @@ U+XTND3
 ....#.#. 3853 
 ....##.. 3854 
 ....#... 3855 
+U+XTND3 = 1CC19
 
-U+XTND3
-........ 3856 
+U+1CC1A LOGIC GATE BUFFER WITH INVERTED INPUT
+........ 3856	Sharp MZ
 ....#... 3857 
 ....##.. 3858 
 ..###.#. 3859 
@@ -924,6 +936,7 @@ U+XTND3
 ..###.#. 3861 
 ....##.. 3862 
 ....#... 3863 
+U+XTND3 = 1CC1A
 
 ========================= YIJING & TAIQUANJING =========================
 
@@ -1622,4 +1635,3 @@ U+4DFC = H110XXX + HXXX011
 U+4DFD = H001XXX + HXXX100
 U+4DFE = H101XXX + HXXX010
 U+4DFF = H010XXX + HXXX101
-q

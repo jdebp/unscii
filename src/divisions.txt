@@ -303,7 +303,7 @@ VEC rect(96-12,0,96,96)
 Unicode (following JIS and BIG5) lacked the right and top ratio blocks until
 version 13.
 
-U+E100	RIGHT ONE QUARTER BLOCK
+U+1FB87	RIGHT ONE QUARTER BLOCK
 VEC rect(96-12*2,0,96,96)
 
 8x8
@@ -316,7 +316,7 @@ VEC rect(96-12*2,0,96,96)
 ......##
 ......##
 
-U+E101	RIGHT THREE EIGHTS BLOCK
+U+1FB88	RIGHT THREE EIGHTS BLOCK
 VEC rect(96-12*3,0,96,96)
 
 8x8
@@ -329,7 +329,7 @@ VEC rect(96-12*3,0,96,96)
 .....###
 .....###
 
-U+E102	RIGHT FIVE EIGHTS BLOCK
+U+1FB89	RIGHT FIVE EIGHTS BLOCK
 VEC rect(96-12*5,0,96,96)
 
 8x8
@@ -342,7 +342,7 @@ VEC rect(96-12*5,0,96,96)
 ...#####
 ...#####
 
-U+E103	RIGHT THREE QUARTERS BLOCK
+U+1FB8A	RIGHT THREE QUARTERS BLOCK
 VEC rect(96-12*6,0,96,96)
 
 8x8
@@ -355,7 +355,7 @@ VEC rect(96-12*6,0,96,96)
 ..######
 ..######
 
-U+E104	RIGHT SEVEN EIGHTS BLOCK
+U+1FB8B	RIGHT SEVEN EIGHTS BLOCK
 VEC rect(96-12*7,0,96,96)
 
 8x8
@@ -368,7 +368,7 @@ VEC rect(96-12*7,0,96,96)
 .#######
 .#######
 
-U+E105	UPPER ONE QUARTER BLOCK
+U+1FB82	UPPER ONE QUARTER BLOCK
 VEC rect(0,0,96,12*2)
 
 8x8
@@ -381,7 +381,7 @@ VEC rect(0,0,96,12*2)
 ........
 ........
 
-U+E106	UPPER THREE EIGHTS BLOCK
+U+1FB83	UPPER THREE EIGHTS BLOCK
 VEC rect(0,0,96,12*3)
 
 8x8
@@ -394,7 +394,7 @@ VEC rect(0,0,96,12*3)
 ........
 ........
 
-U+E107	UPPER FIVE EIGHTS BLOCK
+U+1FB84	UPPER FIVE EIGHTS BLOCK
 VEC rect(0,0,96,12*5)
 
 8x8
@@ -407,7 +407,7 @@ VEC rect(0,0,96,12*5)
 ........
 ........
 
-U+E108	UPPER THREE QUARTERS BLOCK
+U+1FB85	UPPER THREE QUARTERS BLOCK
 VEC rect(0,0,96,12*6)
 
 8x8
@@ -420,7 +420,7 @@ VEC rect(0,0,96,12*6)
 ........
 ........
 
-U+E109	UPPER SEVEN EIGHTS BLOCK
+U+1FB86	UPPER SEVEN EIGHTS BLOCK
 VEC rect(0,0,96,12*7)
 
 8x8
@@ -433,19 +433,18 @@ VEC rect(0,0,96,12*7)
 ########
 ........
 
-Unicode 13 mapping:
+Unscii PUA to Unicode 13 mapping:
 
-U+1FB82 = E105
-U+1FB83 = E106
-U+1FB84 = E107
-U+1FB85 = E108
-U+1FB86 = E109
-
-U+1FB87 = E100
-U+1FB88 = E101
-U+1FB89 = E102
-U+1FB8A = E103
-U+1FB8B = E104
+U+E100 = 1FB87
+U+E101 = 1FB88
+U+E102 = 1FB89
+U+E103 = 1FB8A
+U+E104 = 1FB8B
+U+E105 = 1FB82
+U+E106 = 1FB83
+U+E107 = 1FB84
+U+E108 = 1FB85
+U+E109 = 1FB86
 
 Some of these pieces exist as half-shaded in PETSCII and Amstrad CPC. The
 C-64 glyph is given a separate position because Amstrad CPC differentiates
@@ -511,37 +510,37 @@ VEC rect_shade(0,48,96,96)
 #.#.#.#. 
 .#.#.#.# 
 
-U+E10C	LEFT HALF MEDIUM SHADE
+U+1FB8C	LEFT HALF MEDIUM SHADE
 VEC rect_shade(0,0,48,96)
 8x8
-#.#..... 	Amstrad CPC / Sharp MZ.
-.#.#.... 
-#.#..... 
-.#.#.... 
-#.#..... 
-.#.#.... 
-#.#..... 
-.#.#.... 
+#.#.....	Amstrad CPC / Sharp MZ.
+.#.#....
+#.#.....
+.#.#....
+#.#.....
+.#.#....
+#.#.....
+.#.#....
 
 8x16
-#.#..... 
-.#.#.... 
-#.#..... 
-.#.#.... 
-#.#..... 
-.#.#.... 
-#.#..... 
-.#.#.... 
-#.#..... 
-.#.#.... 
-#.#..... 
-.#.#.... 
-#.#..... 
-.#.#.... 
-#.#..... 
-.#.#.... 
+#.#.....
+.#.#....
+#.#.....
+.#.#....
+#.#.....
+.#.#....
+#.#.....
+.#.#....
+#.#.....
+.#.#....
+#.#.....
+.#.#....
+#.#.....
+.#.#....
+#.#.....
+.#.#....
 
-U+E10D	RIGHT HALF MEDIUM SHADE
+U+1FB8D	RIGHT HALF MEDIUM SHADE
 VEC rect_shade(48,0,96,96)
 8x8
 ....#.#.	Amstrad CPC / Sharp MZ.
@@ -571,7 +570,7 @@ VEC rect_shade(48,0,96,96)
 ....#.#. 
 .....#.# 
 
-U+E10E	UPPER HALF CHECKER BOARD FILL (no unicode)
+U+1FB8E	UPPER HALF CHECKER BOARD FILL (no unicode)
 VEC rect_checkerboard(0,0,96,48)
 8x8
 ##..##.. 	Included for symmetry.
@@ -583,7 +582,7 @@ VEC rect_checkerboard(0,0,96,48)
 ........
 ........
 
-U+E10F	LOWER HALF CHECKER BOARD FILL (no unicode)
+U+1FB8F	LOWER HALF CHECKER BOARD FILL (no unicode)
 VEC rect_checkerboard(0,48,96,96)
 8x8
 ........ 	Commodore 64.
@@ -619,12 +618,12 @@ VEC rect_checkerboard(0,0,48,96)
 ......## 
 ......## 
 
-Unicode 13:
+Unscii PUA to Unicode 13 mapping:
 
-U+1FB8C = E10C
-U+1FB8D = E10D
-U+1FB8E = E10A
-U+1FB8F = E10B
+U+E10C = 1FB8C
+U+E10D = 1FB8D
+U+E10A = 1FB8E
+U+E10B = 1FB8F
 
 U+1FB91 INV 1FB8F
 U+1FB92 INV 1FB8E
@@ -691,7 +690,7 @@ U+25FF FLIPX 25FA
 Amstrad CPC and Sharp MZ have half-raster versions of the diagonal
 triangles.
 
-U+E112	MEDIUM-SHADED LOWER RIGHT TRIANGLE
+U+1FB9E	MEDIUM-SHADED LOWER RIGHT TRIANGLE
 VEC poly_shade(96,0,0,96,96,96)
 8x8
 ........ 	Sharp MZ. Amstrad CPC has an incompatible pattern.
@@ -722,7 +721,7 @@ VEC poly_shade(96,0,0,96,96,96)
 #.#.#.#. 
 .#.#.#.# 
 
-U+E113	MEDIUM-SHADED LOWER LEFT TRIANGLE
+U+1FB9F	MEDIUM-SHADED LOWER LEFT TRIANGLE
 VEC poly_shade(0,0,0,96,96,96)
 8x8
 ........	Sharp MZ. Amstrad CPC has an incompatible pattern.
@@ -752,7 +751,7 @@ VEC poly_shade(0,0,0,96,96,96)
 #.#.#.#. 
 .#.#.#.# 
 
-U+E114	MEDIUM-SHADED UPPER LEFT TRIANGLE
+U+1FB9C	MEDIUM-SHADED UPPER LEFT TRIANGLE
 VEC poly_shade(96,0,0,0,0,96)
 8x8
 #.#.#.#.	Amstrad CPC / Sharp MZ.
@@ -782,7 +781,7 @@ VEC poly_shade(96,0,0,0,0,96)
 #....... 
 ........ 
 
-U+E115	MEDIUM-SHADED UPPER RIGHT TRIANGLE
+U+1FB9D	MEDIUM-SHADED UPPER RIGHT TRIANGLE
 VEC poly_shade(0,0,96,0,96,96)
 8x8
 #.#.#.#. 	Amstrad CPC / Sharp MZ.
@@ -812,10 +811,12 @@ VEC poly_shade(0,0,96,0,96,96)
 ........ 
 .......# 
 
-U+1FB9C = E114
-U+1FB9D = E115
-U+1FB9E = E112
-U+1FB9F = E113
+Unscii PUA to Unicode 13 mapping:
+
+U+E114 = 1FB9C
+U+E115 = 1FB9D
+U+E112 = 1FB9E
+U+E113 = 1FB9F
 
 ================= 2/3-CELL RIGHT-ANGLED TRIANGLES =========================
 
@@ -1404,7 +1405,7 @@ U+E169 INV ISTMPL
 
 Videotex MS12 and MS28. Modelled after MSX.
 
-U+E16A	UPPER AND LOWER TRIANGULAR HALF BLOCK
+U+1FB9A	UPPER AND LOWER TRIANGULAR HALF BLOCK
 8x8
 ######## 
 .######. 
@@ -1415,7 +1416,7 @@ U+E16A	UPPER AND LOWER TRIANGULAR HALF BLOCK
 .######. 
 ######## 
 
-U+E16B	LEFT AND RIGHT TRIANGULAR HALF BLOCK
+U+1FB9B	LEFT AND RIGHT TRIANGULAR HALF BLOCK
 8x8
 #......# 
 ##....## 
@@ -1432,23 +1433,23 @@ U+E16B	LEFT AND RIGHT TRIANGULAR HALF BLOCK
 
 1/6-cell / "lower middle left to lower centre" / XX16
 
-U+E14A = LR16	LOWER RIGHT VERTICAL 1/6-CELL TRIANGLE
-U+E14B = LL16	LOWER LEFT VERTICAL 1/6-CELL TRIANGLE
-U+E14C = UL16	UPPER LEFT VERTICAL 1/6-CELL TRIANGLE
-U+E14D = UR16	UPPER RIGHT VERTICAL 1/6-CELL TRIANGLE
-U+E14E = LR16I	INVERSE LOWER RIGHT VERTICAL 1/6-CELL TRIANGLE
-U+E14F = LL16I	INVERSE LOWER LEFT VERTICAL 1/6-CELL TRIANGLE
-U+E150 = UL16I	INVERSE UPPER LEFT VERTICAL 1/6-CELL TRIANGLE
-U+E151 = UR16I	INVERSE UPPER RIGHT VERTICAL 1/6-CELL TRIANGLE
+U+1FB47 = LR16	LOWER RIGHT VERTICAL 1/6-CELL TRIANGLE
+U+1FB3C = LL16	LOWER LEFT VERTICAL 1/6-CELL TRIANGLE
+U+1FB57 = UL16	UPPER LEFT VERTICAL 1/6-CELL TRIANGLE
+U+1FB62 = UR16	UPPER RIGHT VERTICAL 1/6-CELL TRIANGLE
+U+1FB5D = LR16I	INVERSE LOWER RIGHT VERTICAL 1/6-CELL TRIANGLE
+U+1FB52 = LL16I	INVERSE LOWER LEFT VERTICAL 1/6-CELL TRIANGLE
+U+1FB41 = UL16I	INVERSE UPPER LEFT VERTICAL 1/6-CELL TRIANGLE
+U+1FB4C = UR16I	INVERSE UPPER RIGHT VERTICAL 1/6-CELL TRIANGLE
 
-U+1FB3C = E14B
-U+1FB47 = E14A
-U+1FB57 = E14C
-U+1FB62 = E14D
-U+1FB41 = E150
-U+1FB4C = E151
-U+1FB52 = E14F
-U+1FB5D = E14E
+U+E14B = 1FB3C
+U+E14A = 1FB47
+U+E14C = 1FB57
+U+E14D = 1FB62
+U+E150 = 1FB41
+U+E151 = 1FB4C
+U+E14F = 1FB52
+U+E14E = 1FB5D
 
 1/3-cell horizontal / "lower middle left to lower right" / XXH13
 
@@ -1571,5 +1572,5 @@ U+E161 = 1FB6A
 
 opposing isosceles triangles
 
-U+1FB9A = E16A
-U+1FB9B = E16B
+U+E16A = 1FB9A
+U+E16B = 1FB9B
