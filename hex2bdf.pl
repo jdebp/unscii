@@ -65,7 +65,11 @@ $founrdylowcase =~ tr/A-Z/a-z/;
 
 ## bdftopcf #defines MAXENCODING as 0xffff
 #while (<>) { chomp; $glyph{$1} = $2 if /^([0-9a-fA-F]+):([0-9a-fA-F]+)/; }
-while (<>) { chomp; $glyph{$1} = $2 if /^(0*....):(.+)/; }
+while (<>) {
+	chomp;
+	$glyph{$1} = $2 if /^(0*....):(.+)/;
+	$vpixels=$1 if /^# Height: ([0-9]+)/;
+}
 @chars = sort keys %glyph;
 $nchars = $#chars + 1;
 

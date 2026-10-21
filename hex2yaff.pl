@@ -38,7 +38,7 @@ if (not $font_name) {
    $font_name = "Unscii";
 }
 if (not $vpixels) {
-   $vpixels  = 8;
+   $vpixels  = 16;
 }
 if (not $version) {
    $version = "1.2";
@@ -67,6 +67,7 @@ $founrdylowcase =~ tr/A-Z/a-z/;
 while (<>) {
 	chomp;
 	$glyph{hex($1)} = $2 if /^([0-9a-fA-F]+):([0-9a-fA-F]+)/;
+	$vpixels=$1 if /^# Height: ([0-9]+)/;
 }
 @chars = sort {$a <=> $b} keys %glyph;
 $nchars = $#chars + 1;
