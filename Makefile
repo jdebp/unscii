@@ -23,6 +23,9 @@ SRC=src/punctuation.txt \
     src/pictures.txt \
     src/ctrl.txt
 FNT1=fontfiles/fsex-adapted.fnt \
+     fontfiles/16-16-italics.fnt \
+     fontfiles/16-16-square.fnt \
+     fontfiles/16-16-italics-and-square.fnt \
      fontfiles/unscii-16-16-pet-and-bbcg.fnt \
      fontfiles/unscii-8-8-pet-and-bbcg.fnt \
      fontfiles/unscii-8-8-dragon-and-atari.fnt
@@ -231,6 +234,14 @@ fontfiles/unscii-8-8-trs80-only.hex: src/font-mc6670p.txt
 	$(ASSEMBLE8BY8) $> > $@.tmp
 	mv $@.tmp $@
 
+fontfiles/16-16-italics.hex: italics.txt
+	$(ASSEMBLE16BY16) $> > $@.tmp
+	mv $@.tmp $@
+
+fontfiles/16-16-square.hex: square.txt
+	$(ASSEMBLE16BY16) $> > $@.tmp
+	mv $@.tmp $@
+
 ### FNT ###
 
 .hex.fnt:
@@ -246,6 +257,10 @@ fontfiles/unscii-16-16-pet-and-bbcg.fnt: fontfiles/unscii-16-16-pet-only.hex fon
 	mv $@.tmp $@
 
 fontfiles/unscii-8-8-dragon-and-atari.fnt: fontfiles/unscii-8-8-dragon-only.hex fontfiles/unscii-8-8-atari-only.hex
+	./vtfontcvt $> > $@.tmp
+	mv $@.tmp $@
+
+fontfiles/16-16-italics-and-square.fnt: fontfiles/16-16-italics.hex fontfiles/16-16-square.hex
 	./vtfontcvt $> > $@.tmp
 	mv $@.tmp $@
 
