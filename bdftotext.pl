@@ -1,4 +1,6 @@
 #!/usr/bin/env perl
+# Copyright 2026 Jonathan de Boyne Pollard
+# Public Domain is not a thing in U.K. law, so this is MIT "Expat"/ISC/2 Clause BSD/FreeBSD licenced.
 
 my $doing=0;
 my $charname='';
