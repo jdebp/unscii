@@ -1462,7 +1462,7 @@ U+FINDINUNICODE	IND: 91
 ....#...
 ........
 
-U+FINDINUNICODE	IND: 92
+U+00A3	IND: 92
 ....##..
 ...#..#.
 ...#....
@@ -2552,7 +2552,7 @@ U+FINDINUNICODE	IND: fe
 ########
 ########
 
-U+FINDINUNICODE	IND: ff
+U+03C0	IND: ff
 ........
 ........
 .......#
