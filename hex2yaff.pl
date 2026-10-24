@@ -30,6 +30,7 @@ $result = GetOptions (
              "copyright|c=s" => \$copyright, # Copyright string
              "font|f=s"      => \$font_name, # XLFD FAMILY_NAME
              "rows|r=i"      => \$vpixels,   # XLFD PIXEL_SIZE; vertical pixels
+             "width|w=i"     => \$hpixels,   # horizontal pixels
              "version|v=s"   => \$version,   # Version of this font
              "variant|V=s"   => \$variant
              );
@@ -39,6 +40,9 @@ if (not $font_name) {
 }
 if (not $vpixels) {
    $vpixels  = 16;
+}
+if (not $hpixels) {
+   $hpixels  = 8;
 }
 if (not $version) {
    $version = "1.2";
@@ -68,6 +72,7 @@ while (<>) {
 	chomp;
 	$glyph{hex($1)} = $2 if /^([0-9a-fA-F]+):([0-9a-fA-F]+)/;
 	$vpixels=$1 if /^# Height: ([0-9]+)/;
+	$hpixels=$1 if /^# Width: ([0-9]+)/;
 }
 @chars = sort {$a <=> $b} keys %glyph;
 $nchars = $#chars + 1;
@@ -88,10 +93,10 @@ cap-height: ${caphgt}
 x-height: ${xhgt}
 chars: $nchars\n\n";
 
+$width = int(($hpixels + 3) / 4);  # hex digits per row
 foreach $character (@chars)
 {
 	$glyph = $glyph{$character};
-	$width = length ($glyph) / $vpixels;  # hex digits per row
 	printf "0x%06X:\n", $character;
 	foreach ($glyph =~ /.{$width}/g) {
 		print "\t";

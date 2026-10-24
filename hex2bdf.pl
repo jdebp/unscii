@@ -29,6 +29,8 @@ $result = GetOptions (
              "copyright|c=s" => \$copyright, # Copyright string
              "font|f=s"      => \$font_name, # XLFD FAMILY_NAME
              "rows|r=i"      => \$vpixels,   # XLFD PIXEL_SIZE; vertical pixels
+             "width|w=i"     => \$hpixels,   # horizontal pixels
+             "slant=s"       => \$slant,     # R or I
              "version|v=s"   => \$version,   # Version of this font
              "variant|V=s"   => \$variant
              );
@@ -38,6 +40,12 @@ if (not $font_name) {
 }
 if (not $vpixels) {
    $vpixels  = 16;
+}
+if (not $hpixels) {
+   $hpixels  = 8;
+}
+if (not $slant) {
+   $slant   = 'R';
 }
 if (not $version) {
    $version = "1.2";
@@ -69,14 +77,15 @@ while (<>) {
 	chomp;
 	$glyph{$1} = $2 if /^(0*....):(.+)/;
 	$vpixels=$1 if /^# Height: ([0-9]+)/;
+	$hpixels=$1 if /^# Width: ([0-9]+)/;
 }
 @chars = sort keys %glyph;
 $nchars = $#chars + 1;
 
 print "STARTFONT 2.1
-FONT -${foundrylowcase}-${font_name}-Medium-R-Normal-${variant}-${vpixels}-${point_size10}-75-75-c-80-iso10646-1
+FONT -${foundrylowcase}-${font_name}-Medium-${slant}-Normal-${variant}-${vpixels}-${point_size10}-75-75-c-80-iso10646-1
 SIZE $point_size 75 75
-FONTBOUNDINGBOX $vpixels $vpixels 0 -2
+FONTBOUNDINGBOX $hpixels $vpixels 0 -2
 STARTPROPERTIES 24
 COPYRIGHT \"${copyright}\"
 FONT_VERSION \"${version}\"
@@ -84,7 +93,7 @@ FONT_TYPE \"Bitmap\"
 FOUNDRY \"${foundry}\"
 FAMILY_NAME \"${font_name}\"
 WEIGHT_NAME \"Medium\"
-SLANT \"R\"
+SLANT \"${slant}\"
 SETWIDTH_NAME \"Normal\"
 ADD_STYLE_NAME \"${variant}\"
 PIXEL_SIZE ${vpixels}
