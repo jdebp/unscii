@@ -37,25 +37,25 @@ The program code in this directory:
 - bm2uns.c: converts arbitrary bitmaps into unscii art (needs SDL_image).
 - makeconverters.pl: makes shell scripts that convert between Unicode and legacy Unscii.
 - build system:
- - Makefile: builds the font files and some other stuff.
- - assemble.pl: compiles the files under src/ into .hex files.
+  - Makefile: builds the font files and some other stuff.
+  - assemble.pl: compiles the files under src/ into .hex files.
 - Unscii .txt file utilities:
- - 8by8to16by16.pl: stretches the 8×8 glyphs in a .hex file into 16×16.
- - doubleheight.pl: stretches the 8×8 glyphs in a .hex file into 8×16.
- - merge-otherfonts.pl: fills in the missing glyphs from unifont.hex and fsex-adapted.hex.
+  - 8by8to16by16.pl: stretches the 8×8 glyphs in a .hex file into 16×16.
+  - doubleheight.pl: stretches the 8×8 glyphs in a .hex file into 8×16.
+  - merge-otherfonts.pl: fills in the missing glyphs from unifont.hex and fsex-adapted.hex.
 - Unifont .hex file utilities:
- - hex-sort.pl: sorts a .hex file into codepoint order, useful for when combining .hex files with cat.
- - checkwidths.pl: checks if the glyph widths in a .hex file match terminal usage.
+  - hex-sort.pl: sorts a .hex file into codepoint order, useful for when combining .hex files with cat.
+  - checkwidths.pl: checks if the glyph widths in a .hex file match terminal usage.
 - conversion utilities:
- - bdf2hex.pl: converts a .bdf file into a .hex file (same job as Unifont's unibdf2hex, but unlimited).
- - bdftotext.pl: converts a .bdf file into an Unscii .txt file.
- - drawtotext.pl: converts a .draw file into an Unscii .txt file.
- - hex2bdf.pl: converts a .hex file into X11 .bdf format (from Unifont).
- - hex2yaff.pl: converts a .hex file into .yaff format.
- - vectorize.c: builds a .svg font file from a .hex file.
- - vtfontcvt.cpp: builds a .fnt font file (FreeBSD's vt(4) font format) from a .hex file.
- - makevecfonts.ff: a Fontforge script to build ttf/otf/woff fonts from an .svg font.
- - yafftotext.pl: converts a .yaff file into an Unscii .txt file.
+  - bdf2hex.pl: converts a .bdf file into a .hex file (same job as Unifont's unibdf2hex, but unlimited).
+  - bdftotext.pl: converts a .bdf file into an Unscii .txt file.
+  - drawtotext.pl: converts a .draw file into an Unscii .txt file.
+  - hex2bdf.pl: converts a .hex file into X11 .bdf format (from Unifont).
+  - hex2yaff.pl: converts a .hex file into .yaff format.
+  - vectorize.c: builds a .svg font file from a .hex file.
+  - vtfontcvt.cpp: builds a .fnt font file (FreeBSD's vt(4) font format) from a .hex file.
+  - makevecfonts.ff: a Fontforge script to build ttf/otf/woff fonts from an .svg font.
+  - yafftotext.pl: converts a .yaff file into an Unscii .txt file.
 
 ### Data
 
@@ -64,14 +64,14 @@ Other files in this directory:
 - italics.hex: ASCII repertoire 16×16 italics font.
 - square.hex: ASCII repertoire 16×16 font with letters designed to fill square cells as far as possible.
 - Unifont, the GNU Unicode bitmap font, split into parts for size reasons:
- - unifont_controls.hex: actual ECMA-35 control characters, used by a few, but not many, applications and even excluded from processing by some font tools; so factored out
- - unifont_fallback0.hex: mechanistically extracted fallback glyphs that have a dotted box around text
- - unifont_fallback1.hex: mechanistically extracted fallback glyphs that have hex characters on a solid background with 2 pixel gutters
- - unifont_fallback2.hex: mechanistically extracted fallback glyphs that have hex characters on a solid background with 2 pixel line gaps
- - unifont_fallback3.hex: mechanistically extracted fallback glyphs that have hex characters on a solid background with no gutters nor line gaps
- - unifont_narrow.hex: all of the non-fallback non-control narrow glyphs, from all planes
- - unifont_wide.hex: all of the non-fallback non-control wide glyphs, from only the BMP
- - unifont_wide_smp.hex: all of the non-fallback non-control wide glyphs, from the SMPs
+  - unifont_controls.hex: actual ECMA-35 control characters, used by a few, but not many, applications and even excluded from processing by some font tools; so factored out
+  - unifont_fallback0.hex: mechanistically extracted fallback glyphs that have a dotted box around text
+  - unifont_fallback1.hex: mechanistically extracted fallback glyphs that have hex characters on a solid background with 2 pixel gutters
+  - unifont_fallback2.hex: mechanistically extracted fallback glyphs that have hex characters on a solid background with 2 pixel line gaps
+  - unifont_fallback3.hex: mechanistically extracted fallback glyphs that have hex characters on a solid background with no gutters nor line gaps
+  - unifont_narrow.hex: all of the non-fallback non-control narrow glyphs, from all planes
+  - unifont_wide.hex: all of the non-fallback non-control wide glyphs, from only the BMP
+  - unifont_wide_smp.hex: all of the non-fallback non-control wide glyphs, from the SMPs
 
 ## Font naming scheme
 
@@ -87,9 +87,9 @@ In a variation from Viznut's original scheme, because 16×16 fonts are now gener
   Not all of the systems are patched in.
 - Unscii fonts ending in `-only` contain only the font from the named system; the others contain the Unscii repertoire as well.
 - The `-*-and-*` variants are special to FreeBSD's vt(4) font file format, which can hold two fonts in a single file, for two different weights.
- - The `-pet-and-bbcg` fonts use PETSCII (Commodore PET) for normal weight, and BBC Micro Graphics for bold weight.
- - The `-dragon-and-atari` fonts use Motorola MC 6847T1 for normal weight, and ATSCII (Atari) for bold weight.
- - The `-italics-and-sqare` fonts use `italics` for normal weight, and `square` for bold weight.
+  - The `-pet-and-bbcg` fonts use PETSCII (Commodore PET) for normal weight, and BBC Micro Graphics for bold weight.
+  - The `-dragon-and-atari` fonts use Motorola MC 6847T1 for normal weight, and ATSCII (Atari) for bold weight.
+  - The `-italics-and-sqare` fonts use `italics` for normal weight, and `square` for bold weight.
 
 ## Tool and font format limitations
 
