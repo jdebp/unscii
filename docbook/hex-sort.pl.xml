@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- **************************************************************************
+.... For copyright and licensing terms, see the file named COPYING.
+.... **************************************************************************
+.... vim: indentexpr=:
+.-->
+<?xml-stylesheet href="docbook-xml.css" type="text/css"?>
+
+<refentry id="hex-sort.pl">
+
+<refmeta xmlns:xi="http://www.w3.org/2001/XInclude">
+<refentrytitle>hex-sort.pl</refentrytitle>
+<manvolnum>1</manvolnum>
+<refmiscinfo class="manual">user commands</refmiscinfo>
+<refmiscinfo class="source">Unscii</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>hex-sort.pl</refname>
+<refpurpose>filter to sort Unifont HEX fonts</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+<cmdsynopsis>
+<command>hex-sort.pl</command>
+</cmdsynopsis>
+</refsynopsisdiv>
+
+<refsection><title>Description</title>
+
+<para>
+<command>hex-sort.pl</command> reads a font in Unifont HEX format from its standard input, sorts the glyphs into ascending codepoint order, and prints the font in the same HEX format to its standard output.
+</para>
+
+<note>
+It is actually quite difficult to portably get <citerefentry><refentrytitle>sort</refentrytitle><manvolnum>1</manvolnum></citerefentry> to sort by variable&#x2010;length hexadecimal numeric fields.
+</note>
+
+</refsection>
+
+<refsection><title>Bugs</title>
+
+<para>
+<command>hex-sort.pl</command> does not preserve comments.
+</para>
+
+</refsection>
+
+<refsection><title>Author</title>
+<para>
+Original tool by <author><personname><firstname>Roman</firstname> <surname>Cyzborra</surname></personname></author> and <author><personname><firstname>Paul</firstname> <surname>Hardy</surname></personname></author>, with later adaptations for Unscii by <author><personname><firstname>Ville-Matias</firstname> <surname>Heikkilä</surname></personname></author>.
+Further adaptations and this documentation by <author><personname><firstname>Jonathan</firstname> <surname>de Boyne Pollard</surname></personname></author>.
+</para>
+</refsection>
+
+</refentry>

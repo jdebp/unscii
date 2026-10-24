@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- **************************************************************************
+.... For copyright and licensing terms, see the file named COPYING.
+.... **************************************************************************
+.... vim: indentexpr=:
+.-->
+<?xml-stylesheet href="docbook-xml.css" type="text/css"?>
+
+<refentry id="hex2yaff.pl">
+
+<refmeta xmlns:xi="http://www.w3.org/2001/XInclude">
+<refentrytitle>hex2yaff.pl</refentrytitle>
+<manvolnum>1</manvolnum>
+<refmiscinfo class="manual">user commands</refmiscinfo>
+<refmiscinfo class="source">Unscii</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>hex2yaff.pl</refname>
+<refpurpose>filter to convert Unifont HEX fonts to YAFF fonts</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+<cmdsynopsis>
+<command>hex2yaff.pl</command>
+<arg choice='opt'>--width <replaceable>width</replaceable></arg>
+<arg choice='opt'>--rows <replaceable>height</replaceable></arg>
+<arg choice='opt'>--variant <replaceable>variant</replaceable></arg>
+<arg choice='opt'>--copyright <replaceable>copyright</replaceable></arg>
+<arg choice='opt'>--version <replaceable>version</replaceable></arg>
+</cmdsynopsis>
+</refsynopsisdiv>
+
+<refsection><title>Description</title>
+
+<para>
+<command>hex2yaff.pl</command> reads a font in Unifont HEX format from its standard input and prints the font in Yet Another Font Format (YAFF) format to its standard output.
+</para>
+
+<para>
+Height in the <code>size</code> field is taken from the height given in the HEX file using the <citerefentry><refentrytitle>vtfontcvt</refentrytitle><manvolnum>1</manvolnum></citerefentry> convention.
+The width likewise given in the HEX file determines the number of pixels in each line of the YAFF font (rounding widths up to the next multiple of 4 pixels).
+The <arg choice='plain'>--width</arg> and <arg choice='plain'>--rows</arg> command&#x2010;line options provide default width and height information if the HEX font is missing it.
+</para>
+
+<para>
+The output of <citerefentry><refentrytitle>bdf2hex.pl</refentrytitle><manvolnum>1</manvolnum></citerefentry> will almost always (unless the original BDF font also lacked metadata) have height and width metadata.
+The HEX fonts built in Unscii have these metadata.
+All of the HEX fonts used in FreeBSD come with these metadata, also.
+</para>
+<note>
+Using <arg choice='plain'>--width</arg> or <arg choice='plain'>--rows</arg> at this point in a chain of font conversions is usually an indication that size information has been incorrectly thrown away by an earlier tool.
+</note>
+
+<para>
+The <arg choice='plain'>--copyright</arg>, <arg choice='plain'>--version</arg>, <arg choice='plain'>--variant</arg>, and <arg choice='plain'>--slant</arg> command&#x2010;line options provide metadata to be placed in the font properties of the BDF file.
+These metadata are not present in Unifont HEX files.
+</para>
+
+</refsection>
+
+<refsection><title>Bugs</title>
+
+<para>
+The YAFF format supports arbitrary widths.
+But the HEX format has an effective granularity of 1 nybble (i.e. one hexadecimal digit) in its pixel data, even though its metadata can specify widths that are not aligned to that.
+No attempt is made to mask off extra pixels beyond the specified width.
+Unusually sized HEX fonts will be widened to a multiple of 4 pixels wide, and will include possibly bogus extra pixels that were in the HEX data.
+</para>
+
+</refsection>
+
+<refsection><title>Author</title>
+<para>
+Original tool by <author><personname><firstname>Roman</firstname> <surname>Cyzborra</surname></personname></author> and <author><personname><firstname>Paul</firstname> <surname>Hardy</surname></personname></author>, with later adaptations for Unscii by <author><personname><firstname>Ville-Matias</firstname> <surname>Heikkilä</surname></personname></author>.
+Further adaptations and this documentation by <author><personname><firstname>Jonathan</firstname> <surname>de Boyne Pollard</surname></personname></author>.
+</para>
+</refsection>
+
+</refentry>

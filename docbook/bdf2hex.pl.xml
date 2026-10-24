@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- **************************************************************************
+.... For copyright and licensing terms, see the file named COPYING.
+.... **************************************************************************
+.... vim: indentexpr=:
+.-->
+<?xml-stylesheet href="docbook-xml.css" type="text/css"?>
+
+<refentry id="bdf2hex.pl">
+
+<refmeta xmlns:xi="http://www.w3.org/2001/XInclude">
+<refentrytitle>bdf2hex.pl</refentrytitle>
+<manvolnum>1</manvolnum>
+<refmiscinfo class="manual">user commands</refmiscinfo>
+<refmiscinfo class="source">Unscii</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>bdf2hex.pl</refname>
+<refpurpose>filter to convert BDF fonts to Unifont HEX fonts</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+<cmdsynopsis>
+<command>bdf2hex.pl</command>
+</cmdsynopsis>
+</refsynopsisdiv>
+
+<refsection><title>Description</title>
+
+<para>
+<command>bdf2hex.pl</command> reads a font in BDF format from its standard input and prints the font in Unifont HEX format to its standard output.
+</para>
+
+<para>
+Comments are passed through with the <quote>#</quote> character turned into a TAB character.
+Width and height are taken from the <code>FONTBOUNDINGBOX</code> and recorded using the <citerefentry><refentrytitle>vtfontcvt</refentrytitle><manvolnum>1</manvolnum></citerefentry> convention.
+All other BDF metadata are lost, as the Unifont HEX format does not have any other metadata.
+</para>
+
+</refsection>
+
+<refsection><title>Author</title>
+<para><author><personname><firstname>Jonathan</firstname> <surname>de Boyne Pollard</surname></personname></author></para>
+</refsection>
+
+</refentry>

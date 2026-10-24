@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- **************************************************************************
+.... For copyright and licensing terms, see the file named COPYING.
+.... **************************************************************************
+.... vim: indentexpr=:
+.-->
+<?xml-stylesheet href="docbook-xml.css" type="text/css"?>
+
+<refentry id="vtfontcvt">
+
+<refmeta xmlns:xi="http://www.w3.org/2001/XInclude">
+<refentrytitle>vtfontcvt</refentrytitle>
+<manvolnum>1</manvolnum>
+<refmiscinfo class="manual">user commands</refmiscinfo>
+<refmiscinfo class="source">Unscii</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>vtfontcvt</refname>
+<refpurpose>filter to convert Unifont HEX fonts to FreeBSD vt console fonts</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+<cmdsynopsis>
+<command>vtfontcvt</command>
+<arg choice='opt'>--width <replaceable>width</replaceable></arg>
+<arg choice='opt'>--height <replaceable>height</replaceable></arg>
+<arg choice='req'><replaceable>font-medium</replaceable></arg>
+<arg choice='opt'><replaceable>font-bold</replaceable></arg>
+</cmdsynopsis>
+</refsynopsisdiv>
+
+<refsection><title>Description</title>
+
+<para>
+<command>vtfontcvt</command> is a workalike for the FreeBSD tool of the same name, but portable and only supporting one input format.
+</para>
+<note>
+Fonts can be converted to Unifont HEX format using tools such as <citerefentry><refentrytitle>bdf2hex.pl</refentrytitle><manvolnum>1</manvolnum></citerefentry>.
+</note>
+
+<para>
+It reads one or two fonts in Unifont HEX format from <arg choice='plain'><replaceable>font-medium</replaceable></arg> and <arg choice='plain'><replaceable>font-bold</replaceable></arg>, combines them, and prints them as a single FreeBSD <citerefentry><refentrytitle>vt</refentrytitle><manvolnum>4</manvolnum></citerefentry> format font to its standard output.
+</para>
+<caution>
+The output is binary, so should not be sent to terminals.
+</caution>
+
+<para>
+Width and height recorded in HEX file using the the FreeBSD utility's convention are understood, and override the <replaceable>width</replaceable> and <replaceable>height</replaceable> given by command&#x2010;line options.
+These command&#x2010;line options should be considered fallbacks for when the font does not contain width and height metadata.
+</para>
+
+<para>
+The output of <citerefentry><refentrytitle>bdf2hex.pl</refentrytitle><manvolnum>1</manvolnum></citerefentry> will almost always (unless the original BDF font also lacked metadata) have height and width metadata.
+The HEX fonts built in Unscii have these metadata.
+All of the HEX fonts used in FreeBSD come with these metadata, also.
+</para>
+<note>
+Using <arg choice='plain'>--width</arg> or <arg choice='plain'>--height</arg> at this point in a chain of font conversions is usually an indication that size information has been incorrectly thrown away by an earlier tool.
+</note>
+
+<para>
+Entries in the HEX file(s) may be either 1 or 2 times the stated width (rounded up to the next higher multiple of 8) &#x00D7; height.
+These are treated as single&#x2010;width and double&#x2010;width glyphs, respectively.
+</para>
+
+</refsection>
+
+<refsection><title>Bugs</title>
+
+<para>
+Although the output format supports widths and heights up to 255, <command>vtfontcvt</command> only supports widths and heights up to 32.
+No Unscii font is wider or higher than those.
+</para>
+
+<para>
+The output format does not support more than 65536 glyphs in a file, because it uses 16&#x2010;bit glyph table index fields.
+Large repertoire fonts, like GNU Unifont versions 16 and later, cannot be stored in a single FreeBSD <citerefentry><refentrytitle>vt</refentrytitle><manvolnum>4</manvolnum></citerefentry> font file.
+Whilst this is actually a problem for FreeBSD's kernel virtual terminals, there are other systems that use this font format that allow multiple fonts to be loaded simultanously, that can load Unifont if it is properly chopped up into small bits.
+</para>
+<note>
+A double&#x2010;width character counts as two glyphs in this font format, so double&#x2010;width ranges of a font are doubly expensive in terms of glyph table consumption.
+</note>
+
+</refsection>
+
+<refsection><title>Author</title>
+<para><author><personname><firstname>Jonathan</firstname> <surname>de Boyne Pollard</surname></personname></author></para>
+</refsection>
+
+</refentry>

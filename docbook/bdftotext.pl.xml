@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- **************************************************************************
+.... For copyright and licensing terms, see the file named COPYING.
+.... **************************************************************************
+.... vim: indentexpr=:
+.-->
+<?xml-stylesheet href="docbook-xml.css" type="text/css"?>
+
+<refentry id="bdftotext.pl">
+
+<refmeta xmlns:xi="http://www.w3.org/2001/XInclude">
+<refentrytitle>bdftotext.pl</refentrytitle>
+<manvolnum>1</manvolnum>
+<refmiscinfo class="manual">user commands</refmiscinfo>
+<refmiscinfo class="source">Unscii</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>bdftotext.pl</refname>
+<refpurpose>filter to convert BDF fonts to Unscii text fonts</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+<cmdsynopsis>
+<command>bdftotext.pl</command>
+</cmdsynopsis>
+</refsynopsisdiv>
+
+<refsection><title>Description</title>
+
+<para>
+<command>bdftotext.pl</command> reads a font in BDF format from its standard input and prints the font in Unscii text format to its standard output.
+</para>
+
+<para>
+Comments are passed through with the <quote>#</quote> character turned into a TAB character.
+All other BDF metadata are lost, as the Unscii text format does not have metadata.
+</para>
+
+</refsection>
+
+<refsection><title>Author</title>
+<para><author><personname><firstname>Jonathan</firstname> <surname>de Boyne Pollard</surname></personname></author></para>
+</refsection>
+
+</refentry>

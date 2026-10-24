@@ -64,11 +64,15 @@ HEX1=fontfiles/unscii-8-8.hex \
 HEX2=fontfiles/unscii-8-16-full.hex \
      fontfiles/unscii-16-16-full.hex \
      fontfiles/unifont-full.hex
+TOOLS=vtfontcvt
+MANUALS=man/vtfontcvt.1 man/bdf2hex.pl.1 man/bdftotext.pl.1 man/hex2bdf.pl.1 man/hex2yaff.pl.1 man/hex-sort.pl.1 man/yafftotext.pl.1 man/drawtotext.pl.1
 
 .SUFFIXES: .hex .svg .fnt .bdf .pcf .ttf
-.PHONY: all fnt bdf pcf ttf bm2uns
+.PHONY: all fnt bdf pcf ttf tools manuals
 
-all: vtfontcvt fnt bdf pcf ttf bm2uns
+all: tools fnt bdf pcf ttf manuals bm2uns
+tools: $(TOOLS)
+manuals: $(MANUALS)
 
 hex: $(HEX1) $(HEX2)
 fnt: vtfontcvt $(HEX1:.hex=.fnt) $(FNT1)
@@ -271,37 +275,20 @@ fontfiles/fsex-adapted.fnt: fsex-adapted.hex
 ### PCF ###
 
 .hex.bdf:
-	$(HEX2BDF) --variant='8' --rows=8 < $< > $@.tmp
+	$(HEX2BDF) --variant='8' --rows=8 --width=8 < $< > $@.tmp
 	mv $@.tmp $@
 
-fontfiles/unscii-16.bdf: fontfiles/unscii-16.hex
-	$(HEX2BDF) --variant='16' --rows=16 < $> > $@.tmp
+.for basename in 16 16-full 16-pc16 16-bbcg-only 16-pc16-only 16-pet-only
+fontfiles/unscii-$(basename).bdf: fontfiles/unscii-$(basename).hex
+	$(HEX2BDF) --variant='16' --rows=16 --width=16 < $> > $@.tmp
 	mv $@.tmp $@
+.endfor
 
-fontfiles/unscii-16-full.bdf: fontfiles/unscii-16-full.hex
-	$(HEX2BDF) --variant='16' --rows=16 < $> > $@.tmp
+.for basename in 8-tall
+fontfiles/unscii-$(basename).bdf: fontfiles/unscii-$(basename).hex
+	$(HEX2BDF) --variant='8' --rows=16 --width=8 < $> > $@.tmp
 	mv $@.tmp $@
-
-fontfiles/unscii-8-tall.bdf: fontfiles/unscii-8-tall.hex
-	$(HEX2BDF) --variant='16' --rows=16 < $> > $@.tmp
-	mv $@.tmp $@
-
-fontfiles/unscii-16-pc16.bdf: fontfiles/unscii-16-pc16.hex
-	$(HEX2BDF) --variant='16' --rows=16 < $> > $@.tmp
-	mv $@.tmp $@
-
-fontfiles/unscii-16-bbcg-only.bdf: fontfiles/unscii-16-bbcg-only.hex
-	$(HEX2BDF) --variant='16' --rows=16 < $> > $@.tmp
-	mv $@.tmp $@
-
-fontfiles/unscii-16-pc16-only.bdf: fontfiles/unscii-16-pc16-only.hex
-	$(HEX2BDF) --variant='16' --rows=16 < $> > $@.tmp
-	mv $@.tmp $@
-
-fontfiles/unscii-16-pet-only.bdf: fontfiles/unscii-16-pet-only.hex
-	$(HEX2BDF) --variant='16' --rows=16 < $> > $@.tmp
-	mv $@.tmp $@
-
+.endfor
 
 .bdf.pcf:
 	bdftopcf < $< > $@.tmp
@@ -342,6 +329,13 @@ uns2uni: uns2uni.tr makeconverters.pl
 
 uni2uns: uns2uni.tr makeconverters.pl
 	./makeconverters.pl
+
+### manuals ###
+
+.for basename in vtfontcvt bdf2hex.pl bdftotext.pl drawtotext.pl hex2bdf.pl hex2yaff.pl hex-sort.pl yafftotext.pl
+man/$(basename).1: docbook/$(basename).xml
+	xmlto --skip-validation -o "man/" man $>
+.endfor
 
 ### release ###
 

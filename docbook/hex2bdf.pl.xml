@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- **************************************************************************
+.... For copyright and licensing terms, see the file named COPYING.
+.... **************************************************************************
+.... vim: indentexpr=:
+.-->
+<?xml-stylesheet href="docbook-xml.css" type="text/css"?>
+
+<refentry id="hex2bdf.pl">
+
+<refmeta xmlns:xi="http://www.w3.org/2001/XInclude">
+<refentrytitle>hex2bdf.pl</refentrytitle>
+<manvolnum>1</manvolnum>
+<refmiscinfo class="manual">user commands</refmiscinfo>
+<refmiscinfo class="source">Unscii</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>hex2bdf.pl</refname>
+<refpurpose>filter to convert Unifont HEX fonts to BDF fonts</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+<cmdsynopsis>
+<command>hex2bdf.pl</command>
+<arg choice='opt'>--width <replaceable>width</replaceable></arg>
+<arg choice='opt'>--rows <replaceable>height</replaceable></arg>
+<arg choice='opt'>--variant <replaceable>variant</replaceable></arg>
+<arg choice='opt'>--slant <replaceable>slant</replaceable></arg>
+<arg choice='opt'>--copyright <replaceable>copyright</replaceable></arg>
+<arg choice='opt'>--version <replaceable>version</replaceable></arg>
+</cmdsynopsis>
+</refsynopsisdiv>
+
+<refsection><title>Description</title>
+
+<para>
+<command>hex2bdf.pl</command> reads a font in Unifont HEX format from its standard input and prints the font in BDF format to its standard output.
+</para>
+
+<para>
+Width and height in the <code>FONTBOUNDINGBOX</code> are taken from the width and height given in the HEX file using the <citerefentry><refentrytitle>vtfontcvt</refentrytitle><manvolnum>1</manvolnum></citerefentry> convention.
+The <arg choice='plain'>--width</arg> and <arg choice='plain'>--rows</arg> command&#x2010;line options provide default width and height information if the HEX font is missing it.
+</para>
+
+<para>
+The output of <citerefentry><refentrytitle>bdf2hex.pl</refentrytitle><manvolnum>1</manvolnum></citerefentry> will almost always (unless the original BDF font also lacked metadata) have height and width metadata.
+The HEX fonts built in Unscii have these metadata.
+All of the HEX fonts used in FreeBSD come with these metadata, also.
+</para>
+<note>
+Using <arg choice='plain'>--width</arg> or <arg choice='plain'>--rows</arg> at this point in a chain of font conversions is usually an indication that size information has been incorrectly thrown away by an earlier tool.
+</note>
+
+<para>
+The <arg choice='plain'>--copyright</arg>, <arg choice='plain'>--version</arg>, <arg choice='plain'>--variant</arg>, and <arg choice='plain'>--slant</arg> command&#x2010;line options provide metadata to be placed in the font properties of the BDF file.
+These metadata are not present in Unifont HEX files.
+</para>
+
+</refsection>
+
+<refsection><title>Author</title>
+<para>
+Original tool by <author><personname><firstname>Roman</firstname> <surname>Cyzborra</surname></personname></author> and <author><personname><firstname>Paul</firstname> <surname>Hardy</surname></personname></author>, with later adaptations for Unscii by <author><personname><firstname>Ville-Matias</firstname> <surname>Heikkilä</surname></personname></author>.
+Further adaptations and this documentation by <author><personname><firstname>Jonathan</firstname> <surname>de Boyne Pollard</surname></personname></author>.
+</para>
+</refsection>
+
+</refentry>
